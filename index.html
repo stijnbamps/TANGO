@@ -141,6 +141,7 @@
     color:var(--ink-faint);margin:40px 0 14px;display:flex;align-items:center;gap:12px;
   }
   .sec-title::after{content:"";flex:1;height:1px;background:var(--hair)}
+  .sec-title .count{order:1;color:var(--ink-dim);letter-spacing:.08em;text-transform:none;font-size:11px}
 
   /* ---- source cards ---- */
   .sources{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
@@ -272,7 +273,7 @@
   </section>
 
   <!-- SOURCES -->
-  <div class="sec-title">Per bron</div>
+  <div class="sec-title">Per bron <span class="count" id="srcCount"></span></div>
   <section class="sources" id="sources"></section>
 
   <!-- LIVE TEST -->
@@ -440,7 +441,9 @@
   function renderSources(sources){
     const wrap=document.getElementById("sources");
     wrap.innerHTML="";
-    sources.forEach((s,i)=>{
+    // nulwaardes en ongeldige metingen tellen niet mee
+    const valid=(sources||[]).filter(s=>Number.isFinite(s.oi) && s.oi>0);
+    valid.forEach((s,i)=>{
       const c=document.createElement("div");
       c.className="card";
       c.style.opacity=0; c.style.transform="translateY(8px)";
@@ -456,7 +459,9 @@
         c.style.opacity=1; c.style.transform="none";
       }, 120*i);
     });
-    const avg = sources.reduce((a,s)=>a+s.oi,0)/sources.length;
+    document.getElementById("srcCount").textContent =
+      valid.length + " bron" + (valid.length===1?"":"nen") + " gemeten";
+    const avg = valid.length ? valid.reduce((a,s)=>a+s.oi,0)/valid.length : 0;
     setIndex(avg);
   }
 
