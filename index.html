@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>De Trump Oranje-Index — POTUS-colorimeter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14161A;
+    --panel:#1B1F24;
+    --panel-2:#22272E;
+    --hair:#2E353D;
+    --hair-bright:#3C444E;
+    --ink:#E9E6DF;
+    --ink-dim:#9AA1AB;
+    --ink-faint:#69707A;
+    --accent:#F08A1D;
+    --good:#7FB069;
+    /* scale stops */
+    --vanilla:#F2E7C9;
+    --tangerine:#F08A1D;
+    --rotten:#8F3B12;
+    --radius:3px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Space Grotesk",system-ui,sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    padding:clamp(16px,4vw,40px);
+  }
+  .wrap{max-width:1040px;margin:0 auto}
+
+  /* ---- header ---- */
+  .masthead{
+    display:flex;justify-content:space-between;align-items:flex-start;
+    gap:16px;flex-wrap:wrap;
+    border-bottom:1px solid var(--hair);
+    padding-bottom:18px;margin-bottom:30px;
+  }
+  .eyebrow{
+    font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--ink-faint);
+  }
+  h1{
+    font-size:clamp(28px,5.5vw,46px);font-weight:700;letter-spacing:-.02em;
+    margin:8px 0 0;line-height:1.02;
+  }
+  h1 .o{color:var(--tangerine)}
+  .sub{color:var(--ink-dim);font-size:14px;max-width:46ch;margin-top:10px}
+  .status{
+    font-family:"Space Mono",monospace;font-size:11px;color:var(--ink-faint);
+    text-align:right;letter-spacing:.05em;white-space:nowrap;
+  }
+  .badge{
+    display:inline-block;margin-top:8px;padding:3px 8px;border:1px solid var(--hair-bright);
+    border-radius:var(--radius);font-family:"Space Mono",monospace;font-size:10px;
+    letter-spacing:.14em;color:var(--ink-dim);text-transform:uppercase;
+  }
+  .badge.live{color:var(--good);border-color:#36502c}
+
+  /* ---- hero reading ---- */
+  .reading{
+    display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,4vw,44px);
+    align-items:center;
+    background:var(--panel);border:1px solid var(--hair);border-radius:var(--radius);
+    padding:clamp(22px,3.5vw,36px);margin-bottom:14px;
+  }
+  .oi-num{font-family:"Space Mono",monospace;line-height:.9}
+  .oi-num .val{font-size:clamp(56px,12vw,104px);font-weight:700;letter-spacing:-.03em}
+  .oi-num .scale100{color:var(--ink-faint);font-size:clamp(18px,3vw,26px);font-weight:400}
+  .oi-band{font-size:clamp(15px,2.6vw,20px);font-weight:600;margin-top:6px;letter-spacing:.01em}
+  .oi-label{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--ink-faint);margin-bottom:2px}
+
+  /* ---- warning lamp ---- */
+  .lamp{display:inline-flex;align-items:center;gap:11px;margin-top:18px;
+    font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.13em;text-transform:uppercase}
+  .lamp .bulb{width:18px;height:18px;border-radius:50%;background:#2c3138;
+    border:1px solid #000;box-shadow:inset 0 1px 2px rgba(0,0,0,.6);transition:background .4s,box-shadow .4s;flex:none}
+  .lamp[data-level="0"] .bulb{background:#3c6336;box-shadow:0 0 9px 1px rgba(127,176,105,.55),inset 0 1px 2px rgba(0,0,0,.5)}
+  .lamp[data-level="0"] .lamp-txt{color:var(--good)}
+  .lamp[data-level="1"] .bulb{background:#E0A93A;box-shadow:0 0 13px 3px rgba(224,169,58,.7),inset 0 1px 2px rgba(0,0,0,.4)}
+  .lamp[data-level="1"] .lamp-txt{color:#E0A93A}
+  .lamp[data-level="2"] .bulb{background:#E2412B;animation:flash .7s steps(1) infinite}
+  .lamp[data-level="2"] .lamp-txt{color:#E2412B}
+  @keyframes flash{
+    0%,49%{box-shadow:0 0 17px 5px rgba(226,65,43,.9),inset 0 1px 2px rgba(0,0,0,.4);opacity:1}
+    50%,100%{box-shadow:0 0 2px 0 rgba(226,65,43,.2);opacity:.4}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .lamp[data-level="2"] .bulb{animation:none;box-shadow:0 0 15px 3px rgba(226,65,43,.85)}
+  }
+
+  /* ---- the bar (signature) ---- */
+  .meter{position:relative;padding-top:26px}
+  .needle{
+    position:absolute;top:6px;left:0;transform:translateX(-50%);
+    transition:left .9s cubic-bezier(.16,.84,.34,1);
+    display:flex;flex-direction:column;align-items:center;z-index:3;
+  }
+  .needle .tip{
+    width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;
+    border-top:9px solid var(--ink);
+  }
+  .needle .read{
+    font-family:"Space Mono",monospace;font-size:11px;font-weight:700;
+    background:var(--ink);color:#14161A;padding:1px 6px;border-radius:2px;margin-bottom:3px;
+    white-space:nowrap;
+  }
+  .track{
+    height:34px;border-radius:var(--radius);
+    background:linear-gradient(90deg,
+      var(--vanilla) 0%,
+      #F4C24A 30%,
+      var(--tangerine) 55%,
+      #D9641A 78%,
+      var(--rotten) 100%);
+    border:1px solid rgba(0,0,0,.35);position:relative;overflow:hidden;
+  }
+  .track .ticks{position:absolute;inset:0;display:flex;justify-content:space-between;pointer-events:none}
+  .track .ticks span{width:1px;background:rgba(0,0,0,.22)}
+  .zones{
+    display:flex;margin-top:8px;font-family:"Space Mono",monospace;font-size:10px;
+    letter-spacing:.06em;color:var(--ink-dim);text-transform:uppercase;
+  }
+  .zones div{flex:1;text-align:center;border-left:1px solid var(--hair);padding-top:2px}
+  .zones div:first-child{border-left:0}
+  .axis{display:flex;justify-content:space-between;font-family:"Space Mono",monospace;
+    font-size:10px;color:var(--ink-faint);margin-top:4px}
+
+  /* ---- sections ---- */
+  .sec-title{
+    font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--ink-faint);margin:40px 0 14px;display:flex;align-items:center;gap:12px;
+  }
+  .sec-title::after{content:"";flex:1;height:1px;background:var(--hair)}
+
+  /* ---- source cards ---- */
+  .sources{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .card{
+    background:var(--panel);border:1px solid var(--hair);border-radius:var(--radius);
+    padding:16px;display:flex;flex-direction:column;gap:12px;
+  }
+  .card .src{display:flex;justify-content:space-between;align-items:center}
+  .card .name{font-weight:700;font-size:14px;letter-spacing:.02em}
+  .card .when{font-family:"Space Mono",monospace;font-size:10px;color:var(--ink-faint)}
+  .card .swatch{height:46px;border-radius:2px;border:1px solid rgba(0,0,0,.4)}
+  .card .cardnum{display:flex;align-items:baseline;gap:6px}
+  .card .cardnum b{font-family:"Space Mono",monospace;font-size:26px;font-weight:700}
+  .card .cardnum small{font-family:"Space Mono",monospace;font-size:11px;color:var(--ink-faint)}
+  .card .cband{font-size:12px;color:var(--ink-dim);font-weight:500}
+
+  /* ---- live test ---- */
+  .lab{
+    display:grid;grid-template-columns:1.1fr 1fr;gap:14px;
+    background:var(--panel);border:1px solid var(--hair);border-radius:var(--radius);
+    padding:clamp(16px,3vw,24px);
+  }
+  .drop{
+    border:1.5px dashed var(--hair-bright);border-radius:var(--radius);
+    min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;gap:10px;padding:20px;cursor:pointer;transition:border-color .2s,background .2s;
+    color:var(--ink-dim);position:relative;overflow:hidden;
+  }
+  .drop:hover,.drop.over{border-color:var(--tangerine);background:rgba(240,138,29,.05)}
+  .drop:focus-visible{outline:2px solid var(--tangerine);outline-offset:3px}
+  .drop img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.96}
+  .drop .hint{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.08em}
+  .drop .big{font-size:30px;line-height:1}
+  .labout{display:flex;flex-direction:column;gap:14px;justify-content:center}
+  .labout .row{display:flex;justify-content:space-between;align-items:center;
+    padding-bottom:10px;border-bottom:1px solid var(--hair);font-size:13px}
+  .labout .row span:first-child{color:var(--ink-dim);font-family:"Space Mono",monospace;
+    font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+  .labout .row span:last-child{font-family:"Space Mono",monospace;font-weight:700}
+  .labout .bigoi{font-family:"Space Mono",monospace;font-size:44px;font-weight:700;line-height:1}
+  .labswatch{height:24px;width:60px;border-radius:2px;border:1px solid rgba(0,0,0,.4);display:inline-block;vertical-align:middle}
+  .urlrow{display:flex;gap:8px;margin-top:12px}
+  .urlrow input{
+    flex:1;background:var(--panel-2);border:1px solid var(--hair);border-radius:var(--radius);
+    color:var(--ink);padding:9px 11px;font-family:"Space Mono",monospace;font-size:12px;
+  }
+  .urlrow input:focus{outline:2px solid var(--tangerine);outline-offset:1px;border-color:transparent}
+  button.act{
+    background:var(--tangerine);color:#14161A;border:0;border-radius:var(--radius);
+    font-family:"Space Mono",monospace;font-weight:700;font-size:12px;letter-spacing:.04em;
+    padding:9px 14px;cursor:pointer;text-transform:uppercase;
+  }
+  button.act:hover{filter:brightness(1.07)}
+  button.act:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+  /* ---- method ---- */
+  .method{
+    background:var(--panel);border:1px solid var(--hair);border-radius:var(--radius);
+    padding:clamp(16px,3vw,24px);font-size:13px;color:var(--ink-dim);
+  }
+  .method h3{margin:0 0 10px;font-size:13px;color:var(--ink);letter-spacing:.02em}
+  .method code{font-family:"Space Mono",monospace;color:var(--ink);background:var(--panel-2);
+    padding:1px 5px;border-radius:2px;font-size:12px}
+  .method ol{margin:0;padding-left:18px}
+  .method li{margin-bottom:6px}
+  .refchip{display:inline-block;width:14px;height:14px;border-radius:2px;border:1px solid #000;
+    vertical-align:-2px;background:#EDCDB8}
+
+  footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--hair);
+    font-family:"Space Mono",monospace;font-size:11px;color:var(--ink-faint);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+  @media(max-width:760px){
+    .reading{grid-template-columns:1fr;text-align:center}
+    .sources{grid-template-columns:repeat(2,1fr)}
+    .lab{grid-template-columns:1fr}
+    .zones div{font-size:9px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .needle{transition:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow">POTUS-colorimeter · v1.0</div>
+      <h1>De Trump <span class="o">Oranje</span>-Index</h1>
+      <p class="sub">Dagelijkse spectrofotometrische meting van de presidentiële huidtint,
+      gemiddeld over vier nieuwsbronnen. Referentiewaarde: bleke kaukasische huid
+      <span class="refchip"></span> <code style="font-size:11px">#EDCDB8</code>.</p>
+    </div>
+    <div class="status">
+      <div id="updated">— laatste meting: —</div>
+      <span class="badge" id="srcBadge">DEMO-DATA</span>
+    </div>
+  </header>
+
+  <!-- HERO READING -->
+  <section class="reading">
+    <div class="oi-num">
+      <div class="oi-label">Index vandaag</div>
+      <span class="val" id="oiVal">0</span><span class="scale100"> / 100</span>
+      <div class="oi-band" id="oiBand">—</div>
+      <div class="lamp" id="lamp" data-level="0">
+        <span class="bulb"></span>
+        <span class="lamp-txt" id="lampTxt">Binnen norm</span>
+      </div>
+    </div>
+    <div class="meter">
+      <div class="needle" id="needle" style="left:0%">
+        <div class="read" id="needleRead">0.0</div>
+        <div class="tip"></div>
+      </div>
+      <div class="track">
+        <div class="ticks" id="ticks"></div>
+      </div>
+      <div class="zones">
+        <div>Plain&nbsp;Vanilla</div>
+        <div>Sun-Kissed</div>
+        <div>Tangerine</div>
+        <div>Full&nbsp;Cheeto</div>
+        <div>Rotten&nbsp;Orange</div>
+      </div>
+      <div class="axis"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
+    </div>
+  </section>
+
+  <!-- SOURCES -->
+  <div class="sec-title">Per bron</div>
+  <section class="sources" id="sources"></section>
+
+  <!-- LIVE TEST -->
+  <div class="sec-title">Test de meter</div>
+  <section class="lab">
+    <div>
+      <div class="drop" id="drop" tabindex="0" role="button" aria-label="Sleep een foto hierin of klik om te uploaden">
+        <div class="big">🍊</div>
+        <div>Sleep een gezichtsfoto hierin</div>
+        <div class="hint">of klik om te uploaden · 100% lokaal</div>
+        <input type="file" id="file" accept="image/*" hidden>
+      </div>
+      <div class="urlrow">
+        <input id="url" placeholder="…of plak een afbeeldings-URL (CORS-vrij)">
+        <button class="act" id="urlBtn">Meet</button>
+      </div>
+    </div>
+    <div class="labout">
+      <div class="oi-label">Resultaat</div>
+      <div class="bigoi" id="labOi">—</div>
+      <div class="row"><span>Band</span><span id="labBand">—</span></div>
+      <div class="row"><span>Gem. huidtint</span><span><i class="labswatch" id="labSwatch"></i> <span id="labHex">—</span></span></div>
+      <div class="row"><span>Tint / Verz.</span><span id="labHsv">—</span></div>
+      <div class="row" style="border-bottom:0"><span>Skin-pixels</span><span id="labPx">—</span></div>
+    </div>
+  </section>
+
+  <!-- METHOD -->
+  <div class="sec-title">Methodologie</div>
+  <section class="method">
+    <h3>Hoe de Oranje-Index berekend wordt</h3>
+    <ol>
+      <li>Per foto worden <strong>huidpixels</strong> geïsoleerd via een gecombineerde RGB- + YCbCr-detectie (geen gezichtsherkenning nodig — bij een portret domineert het gezicht).</li>
+      <li>De gemiddelde huidkleur wordt omgezet naar <code>HSV</code> (tint, verzadiging, helderheid).</li>
+      <li>We vergelijken met de referentie <span class="refchip"></span> bleke huid (tint ≈ 23°, verz. ≈ 22%).</li>
+      <li>De index = verzadigings-overschot binnen de oranje tint-band (14°–42°), geschaald naar <code>0–100</code>. Méér oranje = verzadiging schiet omhoog terwijl de tint oranje blijft — precies de spray-tan-signatuur.</li>
+    </ol>
+    <p style="margin:12px 0 0">De webpagina leest <code>./data.json</code> in als die bestaat (de dagelijkse scrape-output); zonder dat bestand draait hij op gemarkeerde demo-data. De <em>Test de meter</em>-engine werkt altijd, volledig in je browser.</p>
+  </section>
+
+  <footer>
+    <span>Even van de Sobbe · Makerij · satirisch instrument</span>
+    <span id="foot">Geen politieke uitspraak. Alleen kleurnatuurkunde.</span>
+  </footer>
+
+</div>
+
+<canvas id="cv" hidden></canvas>
+<script>
+(() => {
+  "use strict";
+
+  // ---------- colour engine ----------
+  const REF = {r:237, g:205, b:184};           // pale reference skin (#EDCDB8-ish)
+  const REDUCE = matchMedia("(prefers-reduced-motion:reduce)").matches;
+
+  function rgb2hsv(r,g,b){
+    r/=255; g/=255; b/=255;
+    const max=Math.max(r,g,b), min=Math.min(r,g,b), d=max-min;
+    let h=0;
+    if(d!==0){
+      if(max===r) h=((g-b)/d)%6;
+      else if(max===g) h=(b-r)/d+2;
+      else h=(r-g)/d+4;
+      h*=60; if(h<0) h+=360;
+    }
+    return {h, s: max===0?0:d/max, v:max};
+  }
+  const refHsv = rgb2hsv(REF.r,REF.g,REF.b);
+
+  function isSkin(r,g,b){
+    const max=Math.max(r,g,b), min=Math.min(r,g,b);
+    const rgbRule = r>95 && g>40 && b>20 && (max-min)>15 &&
+                    Math.abs(r-g)>15 && r>g && r>b;
+    const cb = -0.168736*r - 0.331264*g + 0.5*b + 128;
+    const cr =  0.5*r - 0.418688*g - 0.081312*b + 128;
+    const ycc = cb>=77 && cb<=135 && cr>=133 && cr<=180;
+    return rgbRule && ycc;
+  }
+
+  function hueGate(h){
+    if(h>=14 && h<=42) return 1;
+    if(h>=0 && h<14)   return h/14;
+    if(h>42 && h<=70)  return (70-h)/28;
+    return 0;
+  }
+
+  function orangeIndex(rgb){
+    const hsv = rgb2hsv(rgb.r,rgb.g,rgb.b);
+    const satExcess = Math.max(0, hsv.s - refHsv.s);
+    const oi = hueGate(hsv.h) * (satExcess/0.55) * 100;
+    return Math.max(0, Math.min(100, oi));
+  }
+
+  const BANDS = [
+    [0,  15, "Plain Vanilla"],
+    [15, 32, "Sun-Kissed"],
+    [32, 50, "Tangerine"],
+    [50, 70, "Full Cheeto"],
+    [70,101, "Rotten Orange"]
+  ];
+  const bandOf = oi => (BANDS.find(b => oi>=b[0] && oi<b[1]) || BANDS[BANDS.length-1])[2];
+
+  const toHex = ({r,g,b}) => "#" +
+    [r,g,b].map(v => Math.round(v).toString(16).padStart(2,"0")).join("");
+
+  // analyse an <img>/<canvas source> -> {oi, rgb, hsv, hex, px}
+  function analyse(imgEl){
+    const cv = document.getElementById("cv");
+    const scale = Math.min(1, 260/Math.max(imgEl.naturalWidth||imgEl.width, 1));
+    const w = Math.max(1, Math.round((imgEl.naturalWidth||imgEl.width)*scale));
+    const h = Math.max(1, Math.round((imgEl.naturalHeight||imgEl.height)*scale));
+    cv.width=w; cv.height=h;
+    const ctx = cv.getContext("2d", {willReadFrequently:true});
+    ctx.drawImage(imgEl,0,0,w,h);
+    let data;
+    try { data = ctx.getImageData(0,0,w,h).data; }
+    catch(e){ return {error:"De afbeelding is door CORS afgeschermd — upload 'm liever lokaal."}; }
+    let sr=0,sg=0,sb=0,n=0;
+    for(let i=0;i<data.length;i+=4){
+      const r=data[i],g=data[i+1],b=data[i+2];
+      if(isSkin(r,g,b)){ sr+=r; sg+=g; sb+=b; n++; }
+    }
+    if(n < 30) return {error:"Geen huid gevonden. Probeer een duidelijkere gezichtsfoto."};
+    const rgb={r:sr/n,g:sg/n,b:sb/n};
+    const hsv=rgb2hsv(rgb.r,rgb.g,rgb.b);
+    return {oi:orangeIndex(rgb), rgb, hsv, hex:toHex(rgb), px:n};
+  }
+
+  // ---------- render: hero meter ----------
+  function setIndex(oi){
+    oi = Math.max(0, Math.min(100, oi));
+    const needle = document.getElementById("needle");
+    const place = () => { needle.style.left = oi + "%"; };
+    document.getElementById("needleRead").textContent = oi.toFixed(1);
+    document.getElementById("oiBand").textContent = bandOf(oi);
+    document.getElementById("oiBand").style.color =
+      oi>=70 ? "#E36412" : oi>=50 ? "var(--tangerine)" : oi>=32 ? "#E0A93A" : "var(--ink)";
+    // warning lamp
+    const lamp=document.getElementById("lamp"), lampTxt=document.getElementById("lampTxt");
+    let lvl=0, msg="Binnen norm";
+    if(oi>=70){ lvl=2; msg="⚠ Code Tangerine"; }
+    else if(oi>=50){ lvl=1; msg="Verhoogde oranjegraad"; }
+    lamp.dataset.level=lvl; lampTxt.textContent=msg;
+    // count up the big number
+    const valEl = document.getElementById("oiVal");
+    if(REDUCE){ valEl.textContent = oi.toFixed(0); place(); return; }
+    needle.style.left = "0%";
+    requestAnimationFrame(()=>requestAnimationFrame(place));
+    const start=performance.now(), dur=900;
+    (function tick(t){
+      const k=Math.min(1,(t-start)/dur);
+      valEl.textContent = (oi*(1-Math.pow(1-k,3))).toFixed(0);
+      if(k<1) requestAnimationFrame(tick);
+    })(start);
+  }
+
+  // ticks
+  (function(){
+    const t=document.getElementById("ticks");
+    for(let i=0;i<=20;i++){ const s=document.createElement("span"); t.appendChild(s); }
+  })();
+
+  // ---------- render: source cards ----------
+  function renderSources(sources){
+    const wrap=document.getElementById("sources");
+    wrap.innerHTML="";
+    sources.forEach((s,i)=>{
+      const c=document.createElement("div");
+      c.className="card";
+      c.style.opacity=0; c.style.transform="translateY(8px)";
+      c.innerHTML=`
+        <div class="src"><span class="name">${s.label}</span><span class="when">${s.ts||""}</span></div>
+        <div class="swatch" style="background:${s.swatch}"></div>
+        <div class="cardnum"><b>${s.oi.toFixed(1)}</b><small>/100</small></div>
+        <div class="cband">${bandOf(s.oi)}</div>`;
+      wrap.appendChild(c);
+      if(REDUCE){ c.style.opacity=1; c.style.transform="none"; return; }
+      setTimeout(()=>{
+        c.style.transition="opacity .4s ease, transform .4s ease";
+        c.style.opacity=1; c.style.transform="none";
+      }, 120*i);
+    });
+    const avg = sources.reduce((a,s)=>a+s.oi,0)/sources.length;
+    setIndex(avg);
+  }
+
+  // ---------- demo seed (clearly marked) ----------
+  const DEMO = {
+    updated: new Date().toISOString(),
+    live: false,
+    sources: [
+      {id:"cnn", label:"CNN", oi:58.4, swatch:"#d6894a", ts:"demo"},
+      {id:"fox", label:"FOX", oi:41.2, swatch:"#d99b66", ts:"demo"},
+      {id:"vrt", label:"VRT", oi:62.7, swatch:"#d57e38", ts:"demo"},
+      {id:"hln", label:"HLN", oi:66.1, swatch:"#d27430", ts:"demo"}
+    ]
+  };
+
+  function applyData(d){
+    renderSources(d.sources);
+    const dt = d.updated ? new Date(d.updated) : null;
+    document.getElementById("updated").textContent =
+      "laatste meting: " + (dt ? dt.toLocaleString("nl-BE",{dateStyle:"short",timeStyle:"short"}) : "—");
+    const badge=document.getElementById("srcBadge");
+    if(d.live){ badge.textContent="LIVE DATA"; badge.classList.add("live"); }
+    else { badge.textContent="DEMO-DATA"; badge.classList.remove("live"); }
+  }
+
+  // try the daily feed, fall back to demo
+  fetch("./data.json",{cache:"no-store"})
+    .then(r=>r.ok?r.json():Promise.reject())
+    .then(d=>applyData({...d, live:true}))
+    .catch(()=>applyData(DEMO));
+
+  // ---------- live test wiring ----------
+  const drop=document.getElementById("drop");
+  const fileInput=document.getElementById("file");
+
+  function showResult(res){
+    const set=(id,v)=>document.getElementById(id).textContent=v;
+    if(res.error){
+      set("labOi","—"); set("labBand",res.error); set("labHex","—");
+      set("labHsv","—"); set("labPx","—");
+      document.getElementById("labSwatch").style.background="transparent";
+      return;
+    }
+    set("labOi", res.oi.toFixed(1));
+    set("labBand", bandOf(res.oi));
+    set("labHex", res.hex);
+    set("labHsv", `${res.hsv.h.toFixed(0)}° / ${(res.hsv.s*100).toFixed(0)}%`);
+    set("labPx", res.px.toLocaleString("nl-BE"));
+    document.getElementById("labSwatch").style.background=res.hex;
+    setIndex(res.oi); // also drive the big meter so you see it move
+  }
+
+  function runImage(src, isLocal){
+    const img=new Image();
+    if(!isLocal) img.crossOrigin="anonymous";   // alleen voor externe URLs
+    img.onload=()=>{
+      drop.innerHTML="";
+      const v=document.createElement("img"); v.src=src; drop.appendChild(v);
+      showResult(analyse(img));
+    };
+    img.onerror=()=>showResult({error: isLocal
+      ? "Kon dit bestand niet als afbeelding lezen."
+      : "Kon de afbeelding niet laden (CORS of dode link)."});
+    img.src=src;
+  }
+
+  function handleFile(f){
+    if(!f || !f.type.startsWith("image/")) return;
+    const reader=new FileReader();
+    reader.onload=e=>runImage(e.target.result, true);   // data: URL → geen CORS-taint
+    reader.onerror=()=>showResult({error:"Kon het bestand niet lezen."});
+    reader.readAsDataURL(f);
+  }
+
+  drop.addEventListener("click", ()=>fileInput.click());
+  drop.addEventListener("keydown", e=>{ if(e.key==="Enter"||e.key===" "){e.preventDefault();fileInput.click();} });
+  fileInput.addEventListener("change", e=>handleFile(e.target.files[0]));
+  ["dragenter","dragover"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add("over");}));
+  ["dragleave","drop"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove("over");}));
+  drop.addEventListener("drop", e=>handleFile(e.dataTransfer.files[0]));
+
+  document.getElementById("urlBtn").addEventListener("click", ()=>{
+    const u=document.getElementById("url").value.trim();
+    if(u) runImage(u, false);
+  });
+  document.getElementById("url").addEventListener("keydown", e=>{
+    if(e.key==="Enter") document.getElementById("urlBtn").click();
+  });
+})();
+</script>
+</body>
+</html>
