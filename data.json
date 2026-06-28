@@ -1,0 +1,27 @@
+{
+  "updated": "2026-06-28T14:09:12.787071+00:00",
+  "live": true,
+  "sources": [
+    {
+      "id": "fox",
+      "label": "FOX",
+      "oi": 37.5,
+      "swatch": "#9c7259",
+      "ts": "14:09"
+    },
+    {
+      "id": "vrt",
+      "label": "VRT",
+      "oi": 0.0,
+      "swatch": "#be858f",
+      "ts": "14:09"
+    },
+    {
+      "id": "hln",
+      "label": "HLN",
+      "oi": 0.0,
+      "swatch": "#aa7981",
+      "ts": "14:09"
+    }
+  ]
+}
