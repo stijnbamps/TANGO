@@ -143,7 +143,7 @@
   .sec-title::after{content:"";flex:1;height:1px;background:var(--hair)}
 
   /* ---- source cards ---- */
-  .sources{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .sources{display:grid;repeat(auto-fit,minmax(150px,1fr));gap:12px}
   .card{
     background:var(--panel);border:1px solid var(--hair);border-radius:var(--radius);
     padding:16px;display:flex;flex-direction:column;gap:12px;
