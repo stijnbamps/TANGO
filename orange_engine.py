@@ -8,27 +8,35 @@ als de webpagina. Schrijft data.json weg (die Netlify dan serveert).
 pip install feedparser pillow requests
 """
 
-import io, json, datetime, colorsys
+import io, re, json, datetime, colorsys
 import requests, feedparser
 from PIL import Image
 
 # ---- bronnen: pas de feed-URLs gerust aan, outlets wijzigen ze soms ----
 SOURCES = [
-    {"id": "fox", "label": "FOX", "feed": "https://moxie.foxnews.com/google-publisher/politics.xml"},
-    {"id": "vrt", "label": "VRT", "feed": "https://www.vrt.be/vrtnws/nl.rss.articles.xml"},
-    {"id": "hln", "label": "HLN", "feed": "https://www.hln.be/buitenland/rss.xml"},
-    {"id": "bbc", "label": "BBC", "feed": "https://feeds.bbci.co.uk/news/world/rss.xml"},
-    {"id": "google", "label": "Google", "feed": "https://news.google.com/rss/search?q=Trump&hl=nl&gl=BE"},
-    {"id": "cnn",    "label": "CNN",        "feed": "https://news.google.com/rss/search?q=Trump+site:cnn.com&hl=en-US&gl=US&ceid=US:en"},
-    {"id": "reuters","label": "Reuters",    "feed": "https://news.google.com/rss/search?q=Trump+site:reuters.com&hl=en-US&gl=US&ceid=US:en"},
-    {"id": "ap",     "label": "AP",         "feed": "https://news.google.com/rss/search?q=Trump+site:apnews.com&hl=en-US&gl=US&ceid=US:en"},
-    {"id": "poli",   "label": "Politico",   "feed": "https://news.google.com/rss/search?q=Trump+site:politico.com&hl=en-US&gl=US&ceid=US:en"},
-    {"id": "hill",   "label": "The Hill",   "feed": "https://news.google.com/rss/search?q=Trump+site:thehill.com&hl=en-US&gl=US&ceid=US:en"},
-    {"id": "nbc",    "label": "NBC",        "feed": "https://news.google.com/rss/search?q=Trump+site:nbcnews.com&hl=en-US&gl=US&ceid=US:en"},
-    {"id": "abc",    "label": "ABC",        "feed": "https://news.google.com/rss/search?q=Trump+site:abcnews.go.com&hl=en-US&gl=US&ceid=US:en"},
-    {"id": "sky",    "label": "Sky News",   "feed": "https://news.google.com/rss/search?q=Trump+site:news.sky.com&hl=en-GB&gl=GB&ceid=GB:en"},
+    # --- native feeds (officiële RSS van de bron) ---
+    {"id": "fox",    "label": "FOX",         "feed": "https://moxie.foxnews.com/google-publisher/politics.xml"},
+    {"id": "nyt",    "label": "NYT",         "feed": "https://rss.nytimes.com/services/xml/rss/nyt/Politics.xml"},
+    {"id": "nytw",   "label": "NYT World",   "feed": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml"},
+    {"id": "bbcus",  "label": "BBC US",      "feed": "https://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml"},
+    {"id": "bbcw",   "label": "BBC World",   "feed": "https://feeds.bbci.co.uk/news/world/rss.xml"},
+    {"id": "guard",  "label": "Guardian",    "feed": "https://www.theguardian.com/us-news/rss"},
+    {"id": "aljaz",  "label": "Al Jazeera",  "feed": "https://www.aljazeera.com/xml/rss/all.xml"},
+    {"id": "wapo",   "label": "Wash. Post",  "feed": "https://feeds.washingtonpost.com/rss/national"},
+    {"id": "npr",    "label": "NPR",         "feed": "https://feeds.npr.org/1014/rss.xml"},
+    {"id": "cbs",    "label": "CBS",         "feed": "https://www.cbsnews.com/latest/rss/politics"},
+
+    # --- Google News, al voorgefilterd op 'Trump' (gegarandeerd werkend) ---
+    {"id": "cnn",    "label": "CNN",         "feed": "https://news.google.com/rss/search?q=Trump+site:cnn.com&hl=en-US&gl=US&ceid=US:en"},
+    {"id": "reuters","label": "Reuters",     "feed": "https://news.google.com/rss/search?q=Trump+site:reuters.com&hl=en-US&gl=US&ceid=US:en"},
+    {"id": "ap",     "label": "AP",          "feed": "https://news.google.com/rss/search?q=Trump+site:apnews.com&hl=en-US&gl=US&ceid=US:en"},
+    {"id": "poli",   "label": "Politico",    "feed": "https://news.google.com/rss/search?q=Trump+site:politico.com&hl=en-US&gl=US&ceid=US:en"},
+    {"id": "hill",   "label": "The Hill",    "feed": "https://news.google.com/rss/search?q=Trump+site:thehill.com&hl=en-US&gl=US&ceid=US:en"},
+    {"id": "nbc",    "label": "NBC",         "feed": "https://news.google.com/rss/search?q=Trump+site:nbcnews.com&hl=en-US&gl=US&ceid=US:en"},
+    {"id": "abc",    "label": "ABC",         "feed": "https://news.google.com/rss/search?q=Trump+site:abcnews.go.com&hl=en-US&gl=US&ceid=US:en"},
+    {"id": "sky",    "label": "Sky News",    "feed": "https://news.google.com/rss/search?q=Trump+site:news.sky.com&hl=en-GB&gl=GB&ceid=GB:en"},
     {"id": "destd",  "label": "De Standaard","feed": "https://news.google.com/rss/search?q=Trump+site:standaard.be&hl=nl&gl=BE&ceid=BE:nl"},
-    {"id": "nos",    "label": "NOS",        "feed": "https://news.google.com/rss/search?q=Trump+site:nos.nl&hl=nl&gl=BE&ceid=BE:nl"},
+    {"id": "nos",    "label": "NOS",         "feed": "https://news.google.com/rss/search?q=Trump+site:nos.nl&hl=nl&gl=BE&ceid=BE:nl"},
 ]
 KEYWORDS = ("trump",)
 REF = (237, 205, 184)          # bleke referentie-huid (#EDCDB8)
@@ -89,7 +97,36 @@ def image_urls(entry):
     for enc in entry.get("enclosures", []):
         if "image" in enc.get("type", "") and enc.get("href"):
             urls.append(enc["href"])
+    # ook eventuele <img> in de samenvatting meepakken
+    for m in re.findall(r'<img[^>]+src=["\']([^"\']+)', entry.get("summary", "")):
+        urls.append(m)
     return urls
+
+
+def og_image(article_url):
+    """Haalt de og:image (hoofdfoto) van een artikelpagina; volgt redirects
+    (ook de Google News-redirect). Geeft None terug als er niets te vinden is."""
+    try:
+        r = requests.get(article_url, headers=UA, timeout=15, allow_redirects=True)
+        m = re.search(r'<meta[^>]+property=["\']og:image["\'][^>]+content=["\']([^"\']+)', r.text, re.I)
+        if not m:
+            m = re.search(r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+property=["\']og:image', r.text, re.I)
+        return m.group(1) if m else None
+    except Exception:
+        return None
+
+
+def candidate_images(entry):
+    """Eerst snelle RSS-beelden, dan de og:image van het artikel zelf."""
+    seen = set()
+    for u in image_urls(entry):
+        if u and u not in seen:
+            seen.add(u); yield u
+    link = entry.get("link")
+    if link:
+        og = og_image(link)
+        if og and og not in seen:
+            yield og
 
 
 def measure_source(src):
@@ -98,7 +135,7 @@ def measure_source(src):
         text = (entry.get("title", "") + entry.get("summary", "")).lower()
         if not any(k in text for k in KEYWORDS):
             continue
-        for url in image_urls(entry):
+        for url in candidate_images(entry):
             try:
                 resp = requests.get(url, headers=UA, timeout=15)
                 resp.raise_for_status()

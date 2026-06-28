@@ -143,7 +143,7 @@
   .sec-title::after{content:"";flex:1;height:1px;background:var(--hair)}
 
   /* ---- source cards ---- */
-  .sources{display:grid;repeat(auto-fit,minmax(150px,1fr));gap:12px}
+  .sources{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
   .card{
     background:var(--panel);border:1px solid var(--hair);border-radius:var(--radius);
     padding:16px;display:flex;flex-direction:column;gap:12px;
@@ -467,8 +467,9 @@
     sources: [
       {id:"cnn", label:"CNN", oi:58.4, swatch:"#d6894a", ts:"demo"},
       {id:"fox", label:"FOX", oi:41.2, swatch:"#d99b66", ts:"demo"},
-      {id:"vrt", label:"VRT", oi:62.7, swatch:"#d57e38", ts:"demo"},
-      {id:"hln", label:"HLN", oi:66.1, swatch:"#d27430", ts:"demo"}
+      {id:"nyt", label:"NYT", oi:62.7, swatch:"#d57e38", ts:"demo"},
+      {id:"bbcw", label:"BBC World", oi:55.0, swatch:"#d4824a", ts:"demo"},
+      {id:"guard", label:"Guardian", oi:66.1, swatch:"#d27430", ts:"demo"}
     ]
   };
 
