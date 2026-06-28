@@ -18,6 +18,8 @@ SOURCES = [
     {"id": "fox", "label": "FOX", "feed": "https://moxie.foxnews.com/google-publisher/politics.xml"},
     {"id": "vrt", "label": "VRT", "feed": "https://www.vrt.be/vrtnws/nl.rss.articles.xml"},
     {"id": "hln", "label": "HLN", "feed": "https://www.hln.be/buitenland/rss.xml"},
+    {"id": "bbc", "label": "BBC", "feed": "https://feeds.bbci.co.uk/news/world/rss.xml"},
+    {"id": "google", "label": "Google", "feed": "https://news.google.com/rss/search?q=Trump&hl=nl&gl=BE"},
 ]
 KEYWORDS = ("trump",)
 REF = (237, 205, 184)          # bleke referentie-huid (#EDCDB8)
