@@ -14,12 +14,21 @@ from PIL import Image
 
 # ---- bronnen: pas de feed-URLs gerust aan, outlets wijzigen ze soms ----
 SOURCES = [
-    {"id": "cnn", "label": "CNN", "feed": "http://rss.cnn.com/rss/edition_us.rss"},
     {"id": "fox", "label": "FOX", "feed": "https://moxie.foxnews.com/google-publisher/politics.xml"},
     {"id": "vrt", "label": "VRT", "feed": "https://www.vrt.be/vrtnws/nl.rss.articles.xml"},
     {"id": "hln", "label": "HLN", "feed": "https://www.hln.be/buitenland/rss.xml"},
     {"id": "bbc", "label": "BBC", "feed": "https://feeds.bbci.co.uk/news/world/rss.xml"},
     {"id": "google", "label": "Google", "feed": "https://news.google.com/rss/search?q=Trump&hl=nl&gl=BE"},
+    {"id": "cnn",    "label": "CNN",        "feed": "https://news.google.com/rss/search?q=Trump+site:cnn.com&hl=en-US&gl=US&ceid=US:en"},
+    {"id": "reuters","label": "Reuters",    "feed": "https://news.google.com/rss/search?q=Trump+site:reuters.com&hl=en-US&gl=US&ceid=US:en"},
+    {"id": "ap",     "label": "AP",         "feed": "https://news.google.com/rss/search?q=Trump+site:apnews.com&hl=en-US&gl=US&ceid=US:en"},
+    {"id": "poli",   "label": "Politico",   "feed": "https://news.google.com/rss/search?q=Trump+site:politico.com&hl=en-US&gl=US&ceid=US:en"},
+    {"id": "hill",   "label": "The Hill",   "feed": "https://news.google.com/rss/search?q=Trump+site:thehill.com&hl=en-US&gl=US&ceid=US:en"},
+    {"id": "nbc",    "label": "NBC",        "feed": "https://news.google.com/rss/search?q=Trump+site:nbcnews.com&hl=en-US&gl=US&ceid=US:en"},
+    {"id": "abc",    "label": "ABC",        "feed": "https://news.google.com/rss/search?q=Trump+site:abcnews.go.com&hl=en-US&gl=US&ceid=US:en"},
+    {"id": "sky",    "label": "Sky News",   "feed": "https://news.google.com/rss/search?q=Trump+site:news.sky.com&hl=en-GB&gl=GB&ceid=GB:en"},
+    {"id": "destd",  "label": "De Standaard","feed": "https://news.google.com/rss/search?q=Trump+site:standaard.be&hl=nl&gl=BE&ceid=BE:nl"},
+    {"id": "nos",    "label": "NOS",        "feed": "https://news.google.com/rss/search?q=Trump+site:nos.nl&hl=nl&gl=BE&ceid=BE:nl"},
 ]
 KEYWORDS = ("trump",)
 REF = (237, 205, 184)          # bleke referentie-huid (#EDCDB8)
