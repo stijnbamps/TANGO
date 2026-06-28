@@ -24,7 +24,7 @@ jobs:
       - name: Meet de oranjegraad
         run: python orange_engine.py
 
-l      - name: Commit data.json
+      - name: Commit data.json
         run: |
           git config user.name  "orange-bot"
           git config user.email "bot@users.noreply.github.com"
