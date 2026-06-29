@@ -17,7 +17,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Dependencies
-        run: pip install feedparser pillow requests
+        run: pip install feedparser pillow requests opencv-python-headless numpy
       - name: Meet de oranjegraad
         run: python orange_engine.py
       - name: Commit data.json
