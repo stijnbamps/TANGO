@@ -156,6 +156,14 @@
   .gtxt strong{font-weight:600;font-size:14px;line-height:1.3}
   .gtxt small{font-family:"Space Mono",monospace;font-size:10.5px;color:var(--ink-faint);letter-spacing:.04em}
   .grav-note{margin:14px 0 0;color:var(--ink-faint);font-size:12px;max-width:62ch}
+  /* ---- mediabarometer (volume chart) ---- */
+  .voltabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+  .voltab{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.04em;
+    background:var(--panel-2);border:1px solid var(--hair);color:var(--ink-dim);
+    padding:6px 12px;border-radius:var(--radius);cursor:pointer;transition:all .15s}
+  .voltab[data-active="1"]{background:var(--tangerine);color:#14161A;border-color:transparent;font-weight:700}
+  .voltab:hover{border-color:var(--hair-bright)}
+  .volchart svg{width:100%;height:auto;display:block}
 
   /* ---- source cards ---- */
   .sources{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
@@ -330,6 +338,21 @@
 
   <div class="sec-title">Laatste koppen <span class="count" id="headCount"></span></div>
   <div class="glist" id="glist"></div>
+
+  <!-- MEDIABAROMETER (volume) -->
+  <div class="sec-title">Mediabarometer <span class="count" id="volMeta"></span></div>
+  <section class="method">
+    <div class="voltabs">
+      <button class="voltab" data-view="hour" data-active="1">Per uur</button>
+      <button class="voltab" data-view="weekday" data-active="0">Per weekdag</button>
+      <button class="voltab" data-view="week" data-active="0">Per week v.d. maand</button>
+    </div>
+    <div class="oi-label" id="volTitle">Per uur van de dag</div>
+    <div class="volchart" id="volChart" style="margin-top:10px"></div>
+    <p class="grav-note">Telt hoeveel Trump-koppen er verschijnen, opgeteld over de dagen, op
+    basis van hun publicatietijd (Belgische tijd). Zo zie je stilaan of er piekuren of -dagen zijn —
+    momenten waarop hij zélf de media opzoekt, of waarop de pers vooral over hém schrijft.</p>
+  </section>
 
   <!-- LIVE TEST -->
   <div class="sec-title">Test de meter</div>
@@ -546,6 +569,53 @@
     });
   }
 
+  // ---------- render: mediabarometer (volume) ----------
+  const VOL_VIEWS = {
+    hour:    { key:"by_hour",          title:"Per uur van de dag (Belgische tijd)",
+               labels:[...Array(24).keys()].map(String) },
+    weekday: { key:"by_weekday",       title:"Per weekdag",
+               labels:["Ma","Di","Wo","Do","Vr","Za","Zo"] },
+    week:    { key:"by_week_of_month", title:"Per week van de maand",
+               labels:["wk 1","wk 2","wk 3","wk 4","wk 5"] }
+  };
+  let volData=null, volView="hour";
+
+  function drawVolume(){
+    if(!volData) return;
+    const v=VOL_VIEWS[volView], vals=volData[v.key]||[];
+    const max=Math.max(1,...vals), n=vals.length;
+    const W=820,H=240,L=30,R=808,T=18,B=198, slot=(R-L)/n, bw=slot-4;
+    let bars="",labels="";
+    vals.forEach((val,i)=>{
+      const x=L+i*slot, bh=(val/max)*(B-T), y=B-bh;
+      bars+=`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(0,bh).toFixed(1)}" rx="1.5" fill="var(--tangerine)"><title>${esc(v.labels[i])}: ${val}</title></rect>`;
+      if(val>0) bars+=`<text x="${(x+bw/2).toFixed(1)}" y="${(y-4).toFixed(1)}" fill="var(--ink-dim)" font-size="9" font-family="Space Mono,monospace" text-anchor="middle">${val}</text>`;
+      if(n<=7 || i%3===0) labels+=`<text x="${(x+bw/2).toFixed(1)}" y="${B+16}" fill="#69707A" font-size="10" font-family="Space Mono,monospace" text-anchor="middle">${esc(v.labels[i])}</text>`;
+    });
+    document.getElementById("volChart").innerHTML=
+      `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(v.title)}">`+
+      `<line x1="${L}" y1="${B}" x2="${R}" y2="${B}" stroke="var(--hair)"/>${bars}${labels}</svg>`;
+    document.getElementById("volTitle").textContent=v.title;
+    document.querySelectorAll(".voltab").forEach(b=>b.dataset.active=(b.dataset.view===volView)?"1":"0");
+  }
+
+  function renderVolume(d){
+    volData=d.volume||null;
+    const meta=document.getElementById("volMeta");
+    if(!volData){
+      meta.textContent="nog geen data";
+      document.getElementById("volChart").innerHTML=
+        '<p class="grav-note">Nog geen volume-data — dit vult zich vanaf de eerste run met de nieuwe engine.</p>';
+      return;
+    }
+    meta.textContent=(d.live?"":"voorbeeld · ")+"totaal "+(volData.total||0)+" koppen sinds "+(volData.since||"—");
+    drawVolume();
+  }
+
+  document.querySelectorAll(".voltab").forEach(b=>{
+    b.addEventListener("click",()=>{ volView=b.dataset.view; drawVolume(); });
+  });
+
   function renderGravity(d){
     const g=d.gravity;
     if(g && g.items && g.items.length){
@@ -615,12 +685,19 @@
         {label:"demo", sev:24, tier:"Politiek rumoer",     kw:"voorbeeld", title:"Voorbeeld: verbale uithaal zonder direct gevolg", url:""},
         {label:"demo", sev:8,  tier:"Triviaal",            kw:"voorbeeld", title:"Voorbeeld: triviaal nieuws (golf, diner)", url:""}
       ]
+    },
+    volume: {
+      by_hour: [1,0,0,1,0,1,2,4,7,11,14,16,15,13,12,14,17,15,12,9,6,4,3,2],
+      by_weekday: [22,26,24,28,30,12,9],
+      by_week_of_month: [31,36,34,38,12],
+      total: 151, since: "voorbeeld"
     }
   };
 
   function applyData(d){
     renderSources(d.sources);
     renderGravity(d);
+    renderVolume(d);
     const dt = d.updated ? new Date(d.updated) : null;
     document.getElementById("updated").textContent =
       "laatste meting: " + (dt ? dt.toLocaleString("nl-BE",{dateStyle:"short",timeStyle:"short"}) : "—");

@@ -5,12 +5,22 @@ Leest per nieuwsbron de RSS-feed, zoekt het recentste Trump-artikel met een
 bruikbare gezichtsfoto, en berekent de Oranje-Index met exact dezelfde logica
 als de webpagina. Schrijft data.json weg (die Netlify dan serveert).
 
-pip install feedparser pillow requests
+pip install feedparser pillow requests opencv-python-headless numpy
 """
 
 import io, re, json, datetime, colorsys, calendar
-import requests, feedparser
+from zoneinfo import ZoneInfo
+import requests, feedparser, numpy as np, cv2
 from PIL import Image
+
+# Haar-gezichtsdetector (zit in opencv-python-headless ingebakken)
+FACE_CASCADE = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+
+
+def detect_faces(pil_img):
+    """Geeft de gevonden gezichten als (x, y, w, h)-boxen."""
+    gray = cv2.cvtColor(np.array(pil_img), cv2.COLOR_RGB2GRAY)
+    return FACE_CASCADE.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(40, 40))
 
 # ---- bronnen: pas de feed-URLs gerust aan, outlets wijzigen ze soms ----
 SOURCES = [
@@ -41,33 +51,47 @@ SOURCES = [
 KEYWORDS = ("trump",)
 REF = (237, 205, 184)          # bleke referentie-huid (#EDCDB8)
 UA = {"User-Agent": "Mozilla/5.0 (orange-index bot)"}
+TZ_NAME = "Europe/Brussels"    # tijdzone voor de uur/dag-statistiek
 
 # ---- ernst-lexicon (grof, bewust transparant — pas gerust aan) ----
+# Nucleair telt ALLEEN als top-ernst wanneer er ook een conflict-context is
+# ('nuclear energy' / 'nuclear plant' mag de meter niet laten ontploffen).
+NUCLEAR_WORDS = ["nuclear", "nuke", "atomic", "atoom", "kernwapen",
+                 "kernoorlog", "warhead", "kernkop"]
+CONFLICT_CTX = ["war", "weapon", "strike", "attack", "missile", "bomb", "launch",
+                "military", "threat", "arsenal", "oorlog", "wapen", "aanval",
+                "raket", "dreig"]
+EXPLICIT_EXISTENTIAL = ["nuclear war", "nuclear weapon", "nuclear strike",
+                        "nuclear attack", "first strike", "kernoorlog",
+                        "kernwapen", "atoomwapen"]
+
 # Per tier: (basisscore, label, [trefwoorden]). Hoogste tier met een treffer wint.
 SEVERITY_TIERS = [
-    (95, "Nucleair", [
-        "nuclear", "nuke", "kernwapen", "kernoorlog", "atoom", "first strike", "doomsday"]),
     (82, "Oorlog / militair", [
         "war", "invasion", "invade", "airstrike", "air strike", "missile", "bombing",
-        "bombard", "warship", "military strike", "ground troops", "oorlog", "invasie",
-        "luchtaanval", "raket", "bombardement", "troepen sturen"]),
-    (68, "Escalatie / crisis", [
-        "sanction", "martial law", "insurrection", "coup", "constitutional crisis",
-        "impeach", "national guard", "state of emergency", "sancties", "staat van beleg",
-        "staatsgreep", "noodtoestand", "afzetting", "grondwettelijke crisis"]),
-    (52, "Concrete maatregel", [
-        "executive order", "tariff", "deport", "travel ban", "pardon", "fired", "fires ",
-        "decree", "signs order", "shutdown", "tarief", "decreet", "deporteren",
-        "ontslag", "gratie", "verbod", "ondertekent"]),
-    (36, "Beleidssignaal", [
-        "threaten", "threat", "vows", "warns", "plans to", "proposes", "demands",
-        "dreigt", "belooft", "waarschuwt", "eist", "kondigt aan", "wil "]),
-    (22, "Politiek rumoer", [
-        "slams", "attacks", "mocks", "claims", "rally", "lawsuit", "feud", "blasts",
-        "haalt uit", "beschuldigt", "rechtszaak", "ruzie", "sneert", "valt uit"]),
+        "bombard", "warship", "troops", "ground troops", "military strike", "combat",
+        "oorlog", "invasie", "luchtaanval", "raket", "bombardement", "gevechten"]),
+    (66, "Escalatie / crisis", [
+        "sanction", "embargo", "martial law", "insurrection", "coup", "crackdown",
+        "constitutional crisis", "impeach", "national guard", "state of emergency",
+        "seize", "sancties", "staat van beleg", "staatsgreep", "noodtoestand",
+        "afzetting", "inval", "grondwettelijke crisis"]),
+    (50, "Concrete maatregel", [
+        "executive order", "signs order", "signs bill", "tariff", "deport",
+        "travel ban", "pardon", "fired", "fires ", "dismiss", "decree", "shutdown",
+        "veto", "freeze", "tarief", "decreet", "deporteren", "ontslag", "gratie",
+        "verbod", "blokkeert", "schrapt", "ondertekent"]),
+    (34, "Beleidssignaal / dreiging", [
+        "threaten", "threat", "vows", "warns", "plans to", "proposes", "pledges",
+        "demands", "calls for", "considers", "weighs", "dreigt", "belooft",
+        "waarschuwt", "eist", "kondigt aan", "overweegt", "wil "]),
+    (20, "Politiek rumoer", [
+        "slams", "attacks", "mocks", "blasts", "rips", "claims", "insists",
+        "lawsuit", "sues", "feud", "spat", "rally", "endorses", "blames",
+        "haalt uit", "beschuldigt", "rechtszaak", "ruzie", "sneert", "hekelt"]),
     (8, "Triviaal", [
-        "golf", "dinner", "mar-a-lago", "melania", "party", "cake", "golft", "diner",
-        "feest", "verjaardag", "selfie"]),
+        "golf", "dinner", "mar-a-lago", "melania", "party", "cake", "birthday",
+        "selfie", "gala", "golft", "diner", "feest", "verjaardag", "vakantie"]),
 ]
 DEFAULT_SEV = (15, "Onbepaald", "")
 LAST_N = 10                    # de 10 recentste koppen tonen we bij de Ernst-Index
@@ -103,18 +127,25 @@ def hue_gate(h):
 
 
 def analyse(img_bytes):
-    """-> (oi, hex) of None als er geen bruikbaar gezicht in zit."""
+    """-> (oi, hex) of None als er geen ECHT gezicht in de foto zit.
+    Eist een gedetecteerd gezicht (geen kast/gebouw/logo meer) en meet de
+    huidtint bínnen dat gezicht, niet op de hele foto."""
     img = Image.open(io.BytesIO(img_bytes)).convert("RGB")
-    img.thumbnail((260, 260))
+    img.thumbnail((640, 640))        # genoeg resolutie voor gezichtsdetectie
+    faces = detect_faces(img)
+    if len(faces) == 0:
+        return None                  # geen gezicht → onbruikbaar
+    x, y, w, h = max(faces, key=lambda f: f[2] * f[3])   # grootste gezicht
+    face = img.crop((int(x), int(y), int(x + w), int(y + h)))
     sr = sg = sb = n = 0
-    for r, g, b in img.getdata():
+    for r, g, b in face.getdata():
         if is_skin(r, g, b):
             sr += r; sg += g; sb += b; n += 1
-    if n < 30:                       # geen huid = geen bruikbare gezichtsfoto
+    if n < 30:
         return None
     r, g, b = sr / n, sg / n, sb / n
-    h, s, _ = rgb2hsv(r, g, b)
-    oi = max(0.0, min(100.0, hue_gate(h) * (max(0, s - REF_S) / 0.55) * 100))
+    hue, sat, _ = rgb2hsv(r, g, b)
+    oi = max(0.0, min(100.0, hue_gate(hue) * (max(0, sat - REF_S) / 0.55) * 100))
     return round(oi, 1), "#%02x%02x%02x" % (round(r), round(g), round(b))
 
 
@@ -147,11 +178,16 @@ def og_image(article_url):
 
 
 def candidate_images(entry):
-    """Eerst snelle RSS-beelden, dan de og:image van het artikel zelf."""
+    """RSS-beelden eerst (met 'trump' in de naam vooraan), dan de og:image."""
+    rss = []
     seen = set()
     for u in image_urls(entry):
         if u and u not in seen:
-            seen.add(u); yield u
+            seen.add(u); rss.append(u)
+    # foto's met 'trump' in de URL krijgen voorrang
+    rss.sort(key=lambda u: 0 if "trump" in u.lower() else 1)
+    for u in rss:
+        yield u
     link = entry.get("link")
     if link:
         og = og_image(link)
@@ -186,6 +222,11 @@ def measure_source(src):
 def score_severity(text):
     """Geeft (score, tier-label, gevonden_trefwoord) voor een stuk tekst."""
     t = text.lower()
+    # Top-ernst alleen bij nucleair MÉT conflict-context (niet 'nuclear energy').
+    if any(p in t for p in EXPLICIT_EXISTENTIAL) or \
+       (any(w in t for w in NUCLEAR_WORDS) and any(c in t for c in CONFLICT_CTX)):
+        return 95, "Nucleair conflict", "nuclear + oorlog"
+    # Anders de getrapte lexicon: hoogste tier met een treffer wint.
     for base, label, words in SEVERITY_TIERS:
         hits = [w.strip() for w in words if w in t]
         if hits:
@@ -199,10 +240,8 @@ def _entry_epoch(entry):
     return calendar.timegm(st) if st else 0
 
 
-def collect_gravity():
-    """Verzamelt recente Trump-items uit alle feeds, scoort ze op ernst,
-    ontdubbelt op titel en houdt de LAST_N recentste koppen over.
-    De hoofdmeter (index) is de piek-ernst binnen die recentste koppen."""
+def gather_items():
+    """Alle unieke Trump-items uit alle feeds, gescoord op ernst, recentste eerst."""
     items, seen = [], set()
     for src in SOURCES:
         feed = feedparser.parse(src["feed"])
@@ -223,14 +262,68 @@ def collect_gravity():
             items.append({
                 "label": src["label"], "sev": sev, "tier": tier, "kw": kw,
                 "title": title, "url": entry.get("link", ""),
-                "ts": ts, "_epoch": epoch,
+                "ts": ts, "_epoch": epoch, "_key": key,
             })
     items.sort(key=lambda x: x["_epoch"], reverse=True)   # recentste eerst
-    latest = items[:LAST_N]
-    for it in latest:
-        it.pop("_epoch", None)
+    return items
+
+
+def gravity_from(items):
+    """De LAST_N recentste koppen + de piek-ernst daarbinnen (voor de meter)."""
+    latest = [{k: v for k, v in it.items() if not k.startswith("_")} for it in items[:LAST_N]]
     peak = max((it["sev"] for it in latest), default=0)
     return {"index": peak, "count": len(items), "items": latest}
+
+
+# ---------------- volume-statistiek (accumuleert over de dagen) ----------------
+STATS_FILE = "stats.json"
+
+
+def load_stats():
+    try:
+        with open(STATS_FILE, encoding="utf-8") as f:
+            s = json.load(f)
+    except Exception:
+        s = {}
+    s.setdefault("by_hour", [0] * 24)
+    s.setdefault("by_weekday", [0] * 7)        # 0 = maandag … 6 = zondag
+    s.setdefault("by_week_of_month", [0] * 5)  # week 1..5 binnen de maand
+    s.setdefault("total", 0)
+    s.setdefault("seen", {})                   # key -> iso (ontdubbeling tussen runs)
+    s.setdefault("since", None)
+    s["by_hour"] = (list(s["by_hour"]) + [0] * 24)[:24]
+    s["by_weekday"] = (list(s["by_weekday"]) + [0] * 7)[:7]
+    s["by_week_of_month"] = (list(s["by_week_of_month"]) + [0] * 5)[:5]
+    return s
+
+
+def update_volume(items):
+    """Telt elke NIEUWE kop bij in de uur/weekdag/week-histogrammen, op basis
+    van het publicatietijdstip. Ontdubbelt tussen runs via een 'seen'-venster,
+    zodat feeds die een kop dagenlang blijven tonen niet dubbel tellen."""
+    tz = ZoneInfo(TZ_NAME)
+    stats = load_stats()
+    now = datetime.datetime.now(datetime.timezone.utc)
+    if not stats["since"]:
+        stats["since"] = now.date().isoformat()
+    for it in items:
+        key = it["_key"]
+        if key in stats["seen"]:
+            continue
+        stats["seen"][key] = now.isoformat()
+        if not it["_epoch"]:
+            continue
+        local = datetime.datetime.fromtimestamp(it["_epoch"], tz)
+        stats["by_hour"][local.hour] += 1
+        stats["by_weekday"][local.weekday()] += 1
+        stats["by_week_of_month"][min(4, (local.day - 1) // 7)] += 1
+        stats["total"] += 1
+    cutoff = (now - datetime.timedelta(days=10)).isoformat()
+    stats["seen"] = {k: v for k, v in stats["seen"].items() if v >= cutoff}
+    stats["updated"] = now.isoformat()
+    with open(STATS_FILE, "w", encoding="utf-8") as f:
+        json.dump(stats, f, ensure_ascii=False, indent=2)
+    return stats
 
 
 def main():
@@ -244,9 +337,11 @@ def main():
         else:
             print("  – geen bruikbare Trump-foto gevonden")
 
-    print("\n→ Ernst-scoring over alle feeds…")
-    gravity = collect_gravity()
-    print(f"  {gravity['count']} items · piek-ernst {gravity['index']}")
+    print("\n→ Ernst-scoring + volume over alle feeds…")
+    items = gather_items()
+    gravity = gravity_from(items)
+    stats = update_volume(items)
+    print(f"  {gravity['count']} koppen · piek-ernst {gravity['index']} · totaal geteld {stats['total']}")
 
     if not out and not gravity["items"]:
         print("Niets gemeten, data.json niet overschreven.")
@@ -257,6 +352,14 @@ def main():
         "live": True,
         "sources": out,
         "gravity": gravity,
+        "volume": {
+            "by_hour": stats["by_hour"],
+            "by_weekday": stats["by_weekday"],
+            "by_week_of_month": stats["by_week_of_month"],
+            "total": stats["total"],
+            "since": stats["since"],
+            "tz": TZ_NAME,
+        },
     }
     with open("data.json", "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
