@@ -24,17 +24,16 @@ jobs:
       - name: Meet de oranjegraad
         run: python orange_engine.py
 
-      - name: Commit data.json
+       - name: Commit data.json
         run: |
           git config user.name  "orange-bot"
           git config user.email "bot@users.noreply.github.com"
           git add data.json
           git diff --staged --quiet && echo "Niets gewijzigd" && exit 0
+          git stash
+          git pull --rebase
+          git stash pop || true
+          git checkout --theirs data.json 2>/dev/null || true
+          git add data.json
           git commit -m "T.A.N.G.O. update"
-          git pull --rebase --autostash
-          git push
-
-          git diff --staged --quiet && echo "Niets gewijzigd" && exit 0
-          git commit -m "Oranje-index update"
-          git pull --rebase --autostash
           git push
