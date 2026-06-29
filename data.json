@@ -1,132 +1,125 @@
 {
-  "updated": "2026-06-28T14:58:56.426576+00:00",
+  "updated": "2026-06-29T02:54:45.273341+00:00",
   "live": true,
   "sources": [
     {
       "id": "fox",
       "label": "FOX",
-      "oi": 37.5,
-      "swatch": "#9c7259",
-      "ts": "14:57"
+      "oi": 18.8,
+      "swatch": "#c19682",
+      "ts": "02:52"
     },
     {
       "id": "nyt",
       "label": "NYT",
-      "oi": 24.2,
-      "swatch": "#c89581",
-      "ts": "14:57"
+      "oi": 16.2,
+      "swatch": "#ce8e83",
+      "ts": "02:52"
     },
     {
       "id": "nytw",
       "label": "NYT World",
       "oi": 10.0,
       "swatch": "#8f7667",
-      "ts": "14:57"
+      "ts": "02:52"
     },
     {
       "id": "bbcus",
       "label": "BBC US",
       "oi": 0.0,
       "swatch": "#dac2bc",
-      "ts": "14:57"
+      "ts": "02:52"
     },
     {
       "id": "bbcw",
       "label": "BBC World",
       "oi": 0.0,
       "swatch": "#dac2bc",
-      "ts": "14:57"
+      "ts": "02:52"
     },
     {
       "id": "guard",
       "label": "Guardian",
-      "oi": 14.1,
-      "swatch": "#b68d7f",
-      "ts": "14:57"
-    },
-    {
-      "id": "aljaz",
-      "label": "Al Jazeera",
-      "oi": 15.1,
-      "swatch": "#b3887c",
-      "ts": "14:57"
+      "oi": 1.8,
+      "swatch": "#9a7d76",
+      "ts": "02:52"
     },
     {
       "id": "cbs",
       "label": "CBS",
-      "oi": 19.4,
-      "swatch": "#aa8472",
-      "ts": "14:58"
+      "oi": 42.3,
+      "swatch": "#9d7755",
+      "ts": "02:54"
     },
     {
       "id": "cnn",
       "label": "CNN",
       "oi": 61.5,
       "swatch": "#a26647",
-      "ts": "14:58"
+      "ts": "02:54"
     },
     {
       "id": "reuters",
       "label": "Reuters",
       "oi": 61.5,
       "swatch": "#a26647",
-      "ts": "14:58"
+      "ts": "02:54"
     },
     {
       "id": "ap",
       "label": "AP",
       "oi": 61.5,
       "swatch": "#a26647",
-      "ts": "14:58"
+      "ts": "02:54"
     },
     {
       "id": "poli",
       "label": "Politico",
       "oi": 61.5,
       "swatch": "#a26647",
-      "ts": "14:58"
+      "ts": "02:54"
     },
     {
       "id": "hill",
       "label": "The Hill",
       "oi": 61.5,
       "swatch": "#a26647",
-      "ts": "14:58"
+      "ts": "02:54"
     },
     {
       "id": "nbc",
       "label": "NBC",
       "oi": 61.5,
       "swatch": "#a26647",
-      "ts": "14:58"
+      "ts": "02:54"
     },
     {
       "id": "abc",
       "label": "ABC",
       "oi": 61.5,
       "swatch": "#a26647",
-      "ts": "14:58"
+      "ts": "02:54"
     },
     {
       "id": "sky",
       "label": "Sky News",
       "oi": 61.5,
       "swatch": "#a26647",
-      "ts": "14:58"
+      "ts": "02:54"
     },
     {
       "id": "destd",
       "label": "De Standaard",
       "oi": 61.5,
       "swatch": "#a26647",
-      "ts": "14:58"
+      "ts": "02:54"
     },
     {
       "id": "nos",
       "label": "NOS",
       "oi": 61.5,
       "swatch": "#a26647",
-      "ts": "14:58"
+      "ts": "02:54"
     }
   ]
 }
