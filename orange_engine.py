@@ -18,9 +18,9 @@ FACE_CASCADE = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_fronta
 
 
 def detect_faces(pil_img):
-    """Geeft de gevonden gezichten als (x, y, w, h)-boxen."""
+    """Geeft de gevonden gezichten als (x, y, w, h)-boxen (streng afgesteld)."""
     gray = cv2.cvtColor(np.array(pil_img), cv2.COLOR_RGB2GRAY)
-    return FACE_CASCADE.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(40, 40))
+    return FACE_CASCADE.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=7, minSize=(60, 60))
 
 # ---- bronnen: pas de feed-URLs gerust aan, outlets wijzigen ze soms ----
 SOURCES = [
@@ -136,6 +136,8 @@ def analyse(img_bytes):
     if len(faces) == 0:
         return None                  # geen gezicht → onbruikbaar
     x, y, w, h = max(faces, key=lambda f: f[2] * f[3])   # grootste gezicht
+    if w * h < 0.015 * img.width * img.height:            # te klein → wellicht valse treffer
+        return None
     face = img.crop((int(x), int(y), int(x + w), int(y + h)))
     sr = sg = sb = n = 0
     for r, g, b in face.getdata():
@@ -177,21 +179,36 @@ def og_image(article_url):
         return None
 
 
+OTHER_POLITICIANS = [
+    "biden", "kamala", "harris", "obama", "vance", "pence", "clinton", "pelosi",
+    "newsom", "desantis", "putin", "zelensky", "zelenskyy", "netanyahu", "macron",
+    "starmer", "modi", "xi-jinping", "jinping", "musk",
+]
+
+
+def _name_ok(url):
+    """Een beeld-URL is OK als 'trump' erin staat, of als er géén andere
+    bekende politicus in de bestandsnaam zit."""
+    u = (url or "").lower()
+    if "trump" in u:
+        return True
+    return not any(name in u for name in OTHER_POLITICIANS)
+
+
 def candidate_images(entry):
-    """RSS-beelden eerst (met 'trump' in de naam vooraan), dan de og:image."""
-    rss = []
-    seen = set()
+    """RSS-beelden eerst ('trump' in de naam vooraan, andere politici eruit),
+    daarna de og:image van het artikel."""
+    rss, seen = [], set()
     for u in image_urls(entry):
-        if u and u not in seen:
+        if u and u not in seen and _name_ok(u):
             seen.add(u); rss.append(u)
-    # foto's met 'trump' in de URL krijgen voorrang
-    rss.sort(key=lambda u: 0 if "trump" in u.lower() else 1)
+    rss.sort(key=lambda u: 0 if "trump" in u.lower() else 1)   # trump-foto's voorrang
     for u in rss:
         yield u
     link = entry.get("link")
     if link:
         og = og_image(link)
-        if og and og not in seen:
+        if og and og not in seen and _name_ok(og):
             yield og
 
 
