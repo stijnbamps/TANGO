@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-29T02:54:45.273341+00:00",
+  "updated": "2026-06-29T09:31:11.260133+00:00",
   "live": true,
   "sources": [
     {
@@ -7,119 +7,232 @@
       "label": "FOX",
       "oi": 18.8,
       "swatch": "#c19682",
-      "ts": "02:52"
+      "photo": "https://a57.foxnews.com/static.foxnews.com/foxnews.com/content/uploads/2026/06/931/523/trump-lewis-george-split_1_.jpeg?ve=1&tl=1",
+      "ts": "09:28"
     },
     {
       "id": "nyt",
       "label": "NYT",
-      "oi": 16.2,
-      "swatch": "#ce8e83",
-      "ts": "02:52"
+      "oi": 51.7,
+      "swatch": "#806c3f",
+      "photo": "https://static01.nyt.com/images/2026/06/29/multimedia/29DC-SCOTUS-hpjv/29DC-SCOTUS-hpjv-mediumSquareAt3X.jpg",
+      "ts": "09:28"
     },
     {
       "id": "nytw",
       "label": "NYT World",
       "oi": 10.0,
       "swatch": "#8f7667",
-      "ts": "02:52"
+      "photo": "https://static01.nyt.com/images/2026/06/17/00int-kazakhstan-trump-video-94217-cover/00int-kazakhstan-trump-video-94217-cover-mediumSquareAt3X.jpg",
+      "ts": "09:28"
     },
     {
       "id": "bbcus",
       "label": "BBC US",
       "oi": 0.0,
       "swatch": "#dac2bc",
-      "ts": "02:52"
+      "photo": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/19a0/live/b6678a80-725d-11f1-b4a5-2d0098f6c080.jpg",
+      "ts": "09:28"
     },
     {
       "id": "bbcw",
       "label": "BBC World",
       "oi": 0.0,
       "swatch": "#dac2bc",
-      "ts": "02:52"
+      "photo": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/19a0/live/b6678a80-725d-11f1-b4a5-2d0098f6c080.jpg",
+      "ts": "09:28"
     },
     {
       "id": "guard",
       "label": "Guardian",
       "oi": 1.8,
       "swatch": "#9a7d76",
-      "ts": "02:52"
+      "photo": "https://i.guim.co.uk/img/media/784f6c6d8d3b0cb38a03adc13f4dccad97f9b3db/494_0_4943_3957/master/4943.jpg?width=140&quality=85&auto=format&fit=max&s=b65b5f3a11ae4fd52839c702b9085954",
+      "ts": "09:28"
     },
     {
       "id": "cbs",
       "label": "CBS",
       "oi": 42.3,
       "swatch": "#9d7755",
-      "ts": "02:54"
+      "photo": "https://assets1.cbsnewsstatic.com/hub/i/r/2026/06/28/67648bd8-dae9-48b8-9ab6-aa0a88b29897/thumbnail/1200x630/d048645a10fc116be42ded77cee5b2d9/1782666293424.png",
+      "ts": "09:30"
     },
     {
       "id": "cnn",
       "label": "CNN",
       "oi": 61.5,
       "swatch": "#a26647",
-      "ts": "02:54"
+      "photo": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
+      "ts": "09:30"
     },
     {
       "id": "reuters",
       "label": "Reuters",
       "oi": 61.5,
       "swatch": "#a26647",
-      "ts": "02:54"
+      "photo": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
+      "ts": "09:30"
     },
     {
       "id": "ap",
       "label": "AP",
       "oi": 61.5,
       "swatch": "#a26647",
-      "ts": "02:54"
+      "photo": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
+      "ts": "09:30"
     },
     {
       "id": "poli",
       "label": "Politico",
       "oi": 61.5,
       "swatch": "#a26647",
-      "ts": "02:54"
+      "photo": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
+      "ts": "09:30"
     },
     {
       "id": "hill",
       "label": "The Hill",
       "oi": 61.5,
       "swatch": "#a26647",
-      "ts": "02:54"
+      "photo": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
+      "ts": "09:30"
     },
     {
       "id": "nbc",
       "label": "NBC",
       "oi": 61.5,
       "swatch": "#a26647",
-      "ts": "02:54"
+      "photo": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
+      "ts": "09:30"
     },
     {
       "id": "abc",
       "label": "ABC",
       "oi": 61.5,
       "swatch": "#a26647",
-      "ts": "02:54"
+      "photo": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
+      "ts": "09:30"
     },
     {
       "id": "sky",
       "label": "Sky News",
       "oi": 61.5,
       "swatch": "#a26647",
-      "ts": "02:54"
+      "photo": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
+      "ts": "09:30"
     },
     {
       "id": "destd",
       "label": "De Standaard",
       "oi": 61.5,
       "swatch": "#a26647",
-      "ts": "02:54"
+      "photo": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
+      "ts": "09:30"
     },
     {
       "id": "nos",
       "label": "NOS",
       "oi": 61.5,
       "swatch": "#a26647",
-      "ts": "02:54"
+      "photo": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
+      "ts": "09:30"
     }
-  ]
+  ],
+  "gravity": {
+    "index": 95,
+    "count": 537,
+    "items": [
+      {
+        "label": "Guardian",
+        "sev": 82,
+        "tier": "Oorlog / militair",
+        "kw": "war",
+        "title": "Trump renaming fiasco fuels jokes as Maher takes Kennedy Center’s Mark Twain prize",
+        "url": "https://www.theguardian.com/tv-and-radio/2026/jun/29/bill-maher-mark-twain-prize-donald-trump-rename-kennedy-center",
+        "ts": "29/06 09:09"
+      },
+      {
+        "label": "NYT",
+        "sev": 15,
+        "tier": "Onbepaald",
+        "kw": "",
+        "title": "With Final Decisions Ahead, the Supreme Court Is Sharply Divided",
+        "url": "https://www.nytimes.com/2026/06/29/us/politics/supreme-court-final-decisions.html",
+        "ts": "29/06 09:03"
+      },
+      {
+        "label": "NPR",
+        "sev": 95,
+        "tier": "Nucleair",
+        "kw": "nuclear",
+        "title": "Red, white and glowing blue: Trump's push for new reactors reaches the finish line",
+        "url": "https://www.npr.org/2026/06/29/nx-s1-5847944/new-nuclear-reactors-america-250-safety-concerns",
+        "ts": "29/06 09:00"
+      },
+      {
+        "label": "NYT",
+        "sev": 82,
+        "tier": "Oorlog / militair",
+        "kw": "war",
+        "title": "Bill Maher Receives Mark Twain Prize at the Kennedy Center",
+        "url": "https://www.nytimes.com/2026/06/28/arts/kennedy-center-bill-maher-mark-twain.html",
+        "ts": "29/06 08:43"
+      },
+      {
+        "label": "AP",
+        "sev": 15,
+        "tier": "Onbepaald",
+        "kw": "",
+        "title": "Bill Maher accepts Twain humor prize as the Kennedy Center navigates Trump-era upheaval - AP News",
+        "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPMmlBRjE2bkhFVmF3R0s3Mi1UYlFDRUVWa2lRZjBxbWIwSEk4ME9GbEdDVmtjWUFydHo5LVNTR1I5cGVsbExtLVVEZHM5VFFtNEFvSXkyYW9fSWhHV3F3UFk2d25Db2JXM3E5T2Yxa3piMi1tWjZjTU85WkthRnNyMlM0cC04c2h3c01PcVhHS3d5N0xnQjJiSV9yREEwU1EtbERDczVB?oc=5",
+        "ts": "29/06 05:56"
+      },
+      {
+        "label": "AP",
+        "sev": 15,
+        "tier": "Onbepaald",
+        "kw": "",
+        "title": "FACT FOCUS: A look at the Trump administration’s challenge to birthright citizenship - AP News",
+        "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPVV9JR052S3NyQmpsM2c1UGJIM3R1b0s3aXA5cnBZd2Zkd1FsRm1mdHFIWDRtRHFtdzVUR3NJWlQ5Mmd6NmdNb3BWQWRvc3FrbW5oNHJ4SnZLdUNBbDZINmkwM1VjbkpQRFMteUZxbTZEakkzcnpsOE0tV2h4dUtqMndJRGZJVmZOMzhnZXhET3FiT0c0S1Zxb25ZbVhOVjFEejl6bzk5enVnY0hDZFNGUzlkUW9adw?oc=5",
+        "ts": "29/06 04:06"
+      },
+      {
+        "label": "AP",
+        "sev": 15,
+        "tier": "Onbepaald",
+        "kw": "",
+        "title": "The Supreme Court nears the end of its term with momentous cases about Trump's power to be decided - AP News",
+        "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNNnFrOHY1akRpeFliSGpIaTZ6LXpDY3FTZVhTOGlDNnZUNVg5czFaWTM1Mm9rNTZaa3kyckZvTDY2SFBrZ1RqVlJWNS1UdGlCZkUxUHluejR2UUg1el94dmVuY0ZFRld5UnZXM01SUXdlU0ROaDZaQjNDaGR4UDhaVUhVc0p2SmFfdEV2aGZOMm5vOW14Q0ZYTkRQSXN5MkZ3T2M4ajBhSlpOSk5EY3RqX25MbF9PZGNKUno3ejNJLTg?oc=5",
+        "ts": "29/06 04:01"
+      },
+      {
+        "label": "CNN",
+        "sev": 15,
+        "tier": "Onbepaald",
+        "kw": "",
+        "title": "Conservative presidential power expert set to assist investigation into Trump foes - CNN",
+        "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPRjM3bVNoWjlJQnJnVWdVTTNWZGtjWW51MnA1a0tiVm1XbE9zbklaZWgtWUp2N3Y4VVB4M2sxZ2xBVVE4dHNVMHF5Njd5ZEdUNFB5M0k0d3NiTUdkQjY1Vkh4WGFYWVdZNG9GMnloWnVKRnF6Y3d3VFk2aTJVZXVqTGs1T04zUFA2NlVmand3NkM?oc=5",
+        "ts": "29/06 03:44"
+      },
+      {
+        "label": "Politico",
+        "sev": 15,
+        "tier": "Onbepaald",
+        "kw": "",
+        "title": "Yoo to advise diGenova on probe into inquiries of Trump’s 2016 campaign and Russia - Politico",
+        "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNeTg1Ry01M1JtY0k0OXhKVTdGcnhHNWxSQ2JzWEpqSXJRUmhIME1fY1JWOFVDZDFvNUo5UnZTbldMdjh4YXY3WVptOWlfNHBaRzlfTjZtbFkySXlGaWltNGtLTDZZeUV2c1lkcDc4NEV5cDF0N29nZjBJdlM2N3FHU2RSbVk5YTQ4TGJlWFdqZ0pNTm9JQ3FGUnBJOFV6UXhUZWZBMDRFa1NFdGptVXVTTm1sb3paTTE2QmcxOGJVc1FyNmZRaHFFREdXUQ?oc=5",
+        "ts": "29/06 03:01"
+      },
+      {
+        "label": "Guardian",
+        "sev": 22,
+        "tier": "Politiek rumoer",
+        "kw": "attacks",
+        "title": "Trump news at a glance: Biden says Trump has ‘diminished’ US standing in the world as he attacks his successor",
+        "url": "https://www.theguardian.com/us-news/2026/jun/29/trump-news-at-a-glance-biden-calls-president-loser-diminished-us-standing-in-world",
+        "ts": "29/06 02:00"
+      }
+    ]
+  }
 }
