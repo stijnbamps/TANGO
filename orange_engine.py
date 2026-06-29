@@ -8,7 +8,7 @@ als de webpagina. Schrijft data.json weg (die Netlify dan serveert).
 pip install feedparser pillow requests
 """
 
-import io, re, json, datetime, colorsys
+import io, re, json, datetime, colorsys, calendar
 import requests, feedparser
 from PIL import Image
 
@@ -41,6 +41,36 @@ SOURCES = [
 KEYWORDS = ("trump",)
 REF = (237, 205, 184)          # bleke referentie-huid (#EDCDB8)
 UA = {"User-Agent": "Mozilla/5.0 (orange-index bot)"}
+
+# ---- ernst-lexicon (grof, bewust transparant — pas gerust aan) ----
+# Per tier: (basisscore, label, [trefwoorden]). Hoogste tier met een treffer wint.
+SEVERITY_TIERS = [
+    (95, "Nucleair", [
+        "nuclear", "nuke", "kernwapen", "kernoorlog", "atoom", "first strike", "doomsday"]),
+    (82, "Oorlog / militair", [
+        "war", "invasion", "invade", "airstrike", "air strike", "missile", "bombing",
+        "bombard", "warship", "military strike", "ground troops", "oorlog", "invasie",
+        "luchtaanval", "raket", "bombardement", "troepen sturen"]),
+    (68, "Escalatie / crisis", [
+        "sanction", "martial law", "insurrection", "coup", "constitutional crisis",
+        "impeach", "national guard", "state of emergency", "sancties", "staat van beleg",
+        "staatsgreep", "noodtoestand", "afzetting", "grondwettelijke crisis"]),
+    (52, "Concrete maatregel", [
+        "executive order", "tariff", "deport", "travel ban", "pardon", "fired", "fires ",
+        "decree", "signs order", "shutdown", "tarief", "decreet", "deporteren",
+        "ontslag", "gratie", "verbod", "ondertekent"]),
+    (36, "Beleidssignaal", [
+        "threaten", "threat", "vows", "warns", "plans to", "proposes", "demands",
+        "dreigt", "belooft", "waarschuwt", "eist", "kondigt aan", "wil "]),
+    (22, "Politiek rumoer", [
+        "slams", "attacks", "mocks", "claims", "rally", "lawsuit", "feud", "blasts",
+        "haalt uit", "beschuldigt", "rechtszaak", "ruzie", "sneert", "valt uit"]),
+    (8, "Triviaal", [
+        "golf", "dinner", "mar-a-lago", "melania", "party", "cake", "golft", "diner",
+        "feest", "verjaardag", "selfie"]),
+]
+DEFAULT_SEV = (15, "Onbepaald", "")
+LAST_N = 10                    # de 10 recentste koppen tonen we bij de Ernst-Index
 
 
 # ---------------- kleur-engine (1:1 met de JS op de pagina) ----------------
@@ -144,12 +174,63 @@ def measure_source(src):
                     oi, hexcol = result
                     return {
                         "id": src["id"], "label": src["label"],
-                        "oi": oi, "swatch": hexcol,
+                        "oi": oi, "swatch": hexcol, "photo": url,
                         "ts": datetime.datetime.now().strftime("%H:%M"),
                     }
             except Exception as e:
                 print(f"  ! {src['label']} {url[:50]}… → {e}")
     return None
+
+
+# ---------------- ernst-scoring (trefwoord-heuristiek) ----------------
+def score_severity(text):
+    """Geeft (score, tier-label, gevonden_trefwoord) voor een stuk tekst."""
+    t = text.lower()
+    for base, label, words in SEVERITY_TIERS:
+        hits = [w.strip() for w in words if w in t]
+        if hits:
+            sev = min(100, base + 2 * (len(set(hits)) - 1))   # kleine bonus per extra treffer
+            return sev, label, hits[0].strip()
+    return DEFAULT_SEV
+
+
+def _entry_epoch(entry):
+    st = entry.get("published_parsed") or entry.get("updated_parsed")
+    return calendar.timegm(st) if st else 0
+
+
+def collect_gravity():
+    """Verzamelt recente Trump-items uit alle feeds, scoort ze op ernst,
+    ontdubbelt op titel en houdt de LAST_N recentste koppen over.
+    De hoofdmeter (index) is de piek-ernst binnen die recentste koppen."""
+    items, seen = [], set()
+    for src in SOURCES:
+        feed = feedparser.parse(src["feed"])
+        for entry in feed.entries:
+            title = (entry.get("title") or "").strip()
+            summary = entry.get("summary") or ""
+            blob = (title + " " + summary)
+            if "trump" not in blob.lower() or not title:
+                continue
+            key = title.lower()[:80]
+            if key in seen:
+                continue
+            seen.add(key)
+            sev, tier, kw = score_severity(blob)
+            epoch = _entry_epoch(entry)
+            ts = (datetime.datetime.fromtimestamp(epoch, datetime.timezone.utc).strftime("%d/%m %H:%M")
+                  if epoch else datetime.datetime.now().strftime("%d/%m %H:%M"))
+            items.append({
+                "label": src["label"], "sev": sev, "tier": tier, "kw": kw,
+                "title": title, "url": entry.get("link", ""),
+                "ts": ts, "_epoch": epoch,
+            })
+    items.sort(key=lambda x: x["_epoch"], reverse=True)   # recentste eerst
+    latest = items[:LAST_N]
+    for it in latest:
+        it.pop("_epoch", None)
+    peak = max((it["sev"] for it in latest), default=0)
+    return {"index": peak, "count": len(items), "items": latest}
 
 
 def main():
@@ -163,7 +244,11 @@ def main():
         else:
             print("  – geen bruikbare Trump-foto gevonden")
 
-    if not out:
+    print("\n→ Ernst-scoring over alle feeds…")
+    gravity = collect_gravity()
+    print(f"  {gravity['count']} items · piek-ernst {gravity['index']}")
+
+    if not out and not gravity["items"]:
         print("Niets gemeten, data.json niet overschreven.")
         return
 
@@ -171,11 +256,15 @@ def main():
         "updated": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "live": True,
         "sources": out,
+        "gravity": gravity,
     }
     with open("data.json", "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
-    avg = sum(s["oi"] for s in out) / len(out)
-    print(f"\nGemiddelde Oranje-Index: {avg:.1f} — data.json geschreven.")
+    if out:
+        avg = sum(s["oi"] for s in out) / len(out)
+        print(f"\nGem. Oranje-Index {avg:.1f} · piek-ernst {gravity['index']} — data.json geschreven.")
+    else:
+        print(f"\nGeen foto's, wel {gravity['count']} ernst-items — data.json geschreven.")
 
 
 if __name__ == "__main__":

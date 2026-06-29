@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>T.A.N.G.O - Trump Always Notably Glowing Orange - POTUS-colorimeter</title>
+<title>T.A.N.G.O. — Trump Always Notably Glowing Orange</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -143,6 +143,20 @@
   .sec-title::after{content:"";flex:1;height:1px;background:var(--hair)}
   .sec-title .count{order:1;color:var(--ink-dim);letter-spacing:.08em;text-transform:none;font-size:11px}
 
+  /* ---- gravity meter + list ---- */
+  .track.grav{background:linear-gradient(90deg,
+    #7FB069 0%, #C9C24A 30%, #E0A93A 52%, #E2412B 78%, #7A1B12 100%)}
+  .glist{display:flex;flex-direction:column;gap:8px}
+  .grow{display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit;
+    background:var(--panel);border:1px solid var(--hair);border-radius:var(--radius);
+    padding:12px 14px;transition:border-color .2s,background .2s}
+  a.grow:hover{border-color:var(--hair-bright);background:var(--panel-2)}
+  .gsev{font-family:"Space Mono",monospace;font-size:24px;font-weight:700;flex:none;width:40px;text-align:right}
+  .gtxt{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .gtxt strong{font-weight:600;font-size:14px;line-height:1.3}
+  .gtxt small{font-family:"Space Mono",monospace;font-size:10.5px;color:var(--ink-faint);letter-spacing:.04em}
+  .grav-note{margin:14px 0 0;color:var(--ink-faint);font-size:12px;max-width:62ch}
+
   /* ---- source cards ---- */
   .sources{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
   .card{
@@ -156,7 +170,11 @@
   .card .cardnum{display:flex;align-items:baseline;gap:6px}
   .card .cardnum b{font-family:"Space Mono",monospace;font-size:26px;font-weight:700}
   .card .cardnum small{font-family:"Space Mono",monospace;font-size:11px;color:var(--ink-faint)}
-  .card .cband{font-size:12px;color:var(--ink-dim);font-weight:500}
+  .card .cband{font-size:12px;color:var(--ink-dim);font-weight:500;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  a.card{text-decoration:none;color:inherit;transition:border-color .2s,transform .2s}
+  a.card:hover{border-color:var(--hair-bright);transform:translateY(-2px)}
+  a.card:hover .seephoto{color:var(--tangerine)}
+  .seephoto{font-family:"Space Mono",monospace;font-size:10px;color:var(--ink-faint);white-space:nowrap}
 
   /* ---- live test ---- */
   .lab{
@@ -231,7 +249,7 @@
   <header class="masthead">
     <div>
       <div class="eyebrow">T.A.N.G.O. · v1.0</div>
-      <h1>Trump Always Notably Glowing <span class="o">Orange</span>
+      <h1>Trump Always Notably <span class="o">Glowing Orange</span></h1>
       <p class="sub">Dagelijkse spectrofotometrische meting van de presidentiële huidtint,
       gemiddeld over vier nieuwsbronnen. Referentiewaarde: bleke kaukasische huid
       <span class="refchip"></span> <code style="font-size:11px">#EDCDB8</code>.</p>
@@ -276,6 +294,43 @@
   <div class="sec-title">Per bron <span class="count" id="srcCount"></span></div>
   <section class="sources" id="sources"></section>
 
+  <!-- ERNST-INDEX -->
+  <div class="sec-title">Ernst-Index <span class="count" id="gravCount"></span></div>
+  <section class="reading">
+    <div class="oi-num">
+      <div class="oi-label">Ernstigste vandaag</div>
+      <span class="val" id="gVal">0</span><span class="scale100"> / 100</span>
+      <div class="oi-band" id="gBand">—</div>
+      <div class="lamp" id="gLamp" data-level="0">
+        <span class="bulb"></span>
+        <span class="lamp-txt" id="gLampTxt">Rustige dag</span>
+      </div>
+    </div>
+    <div class="meter">
+      <div class="needle" id="gNeedle" style="left:0%">
+        <div class="read" id="gNeedleRead">0</div>
+        <div class="tip"></div>
+      </div>
+      <div class="track grav">
+        <div class="ticks" id="gTicks"></div>
+      </div>
+      <div class="zones">
+        <div>Triviaal</div>
+        <div>Rumoer</div>
+        <div>Maatregel</div>
+        <div>Escalatie</div>
+        <div>Kernoorlog</div>
+      </div>
+      <div class="axis"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
+    </div>
+  </section>
+  <p class="grav-note">
+    Ernst = grove trefwoord-schatting van de mógelijke impact (triviaal → kernoorlog), géén objectief feit.
+    De hoofdmeter toont het zwáárste item onder de recentste koppen, niet een gemiddelde.</p>
+
+  <div class="sec-title">Laatste koppen <span class="count" id="headCount"></span></div>
+  <div class="glist" id="glist"></div>
+
   <!-- LIVE TEST -->
   <div class="sec-title">Test de meter</div>
   <section class="lab">
@@ -310,6 +365,7 @@
       <li>De gemiddelde huidkleur wordt omgezet naar <code>HSV</code> (tint, verzadiging, helderheid).</li>
       <li>We vergelijken met de referentie <span class="refchip"></span> bleke huid (tint ≈ 23°, verz. ≈ 22%).</li>
       <li>De index = verzadigings-overschot binnen de oranje tint-band (14°–42°), geschaald naar <code>0–100</code>. Méér oranje = verzadiging schiet omhoog terwijl de tint oranje blijft — precies de spray-tan-signatuur.</li>
+      <li>Het dagcijfer is de <strong>mediaan</strong> over de bronnen (niet het gemiddelde), zodat één rare foto het resultaat niet kan optillen.</li>
     </ol>
     <p style="margin:12px 0 0">De webpagina leest <code>./data.json</code> in als die bestaat (de dagelijkse scrape-output); zonder dat bestand draait hij op gemarkeerde demo-data. De <em>Test de meter</em>-engine werkt altijd, volledig in je browser.</p>
   </section>
@@ -433,9 +489,81 @@
 
   // ticks
   (function(){
-    const t=document.getElementById("ticks");
-    for(let i=0;i<=20;i++){ const s=document.createElement("span"); t.appendChild(s); }
+    ["ticks","gTicks"].forEach(id=>{
+      const t=document.getElementById(id);
+      for(let i=0;i<=20;i++){ t.appendChild(document.createElement("span")); }
+    });
   })();
+
+  // ---------- render: gravity (ernst) meter ----------
+  const GBANDS = [
+    [0,  15, "Triviaal"],
+    [15, 30, "Politiek rumoer"],
+    [30, 45, "Beleidssignaal"],
+    [45, 60, "Concrete maatregel"],
+    [60, 78, "Escalatie / crisis"],
+    [78,101, "Oorlog / nucleair"]
+  ];
+  const bandOfGravity = s => (GBANDS.find(b => s>=b[0] && s<b[1]) || GBANDS[GBANDS.length-1])[2];
+  const gravColor = s => s>=78?"#E2412B":s>=60?"#E36412":s>=45?"#E0A93A":s>=30?"#C9B84A":"#7FB069";
+  const esc = s => String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));
+
+  function setGravity(sev){
+    sev = Math.max(0, Math.min(100, sev));
+    const needle=document.getElementById("gNeedle");
+    const place=()=>{ needle.style.left=sev+"%"; };
+    document.getElementById("gNeedleRead").textContent=sev.toFixed(0);
+    document.getElementById("gBand").textContent=bandOfGravity(sev);
+    document.getElementById("gBand").style.color=gravColor(sev);
+    const lamp=document.getElementById("gLamp"), txt=document.getElementById("gLampTxt");
+    let lvl=0, msg="Rustige dag";
+    if(sev>=78){ lvl=2; msg="⚠ Code Rood"; }
+    else if(sev>=45){ lvl=1; msg="Verhoogde ernst"; }
+    lamp.dataset.level=lvl; txt.textContent=msg;
+    const val=document.getElementById("gVal");
+    if(REDUCE){ val.textContent=sev.toFixed(0); place(); return; }
+    needle.style.left="0%";
+    requestAnimationFrame(()=>requestAnimationFrame(place));
+    const start=performance.now(), dur=900;
+    (function tick(t){
+      const k=Math.min(1,(t-start)/dur);
+      val.textContent=(sev*(1-Math.pow(1-k,3))).toFixed(0);
+      if(k<1) requestAnimationFrame(tick);
+    })(start);
+  }
+
+  function renderGravityItems(items){
+    const wrap=document.getElementById("glist");
+    wrap.innerHTML="";
+    (items||[]).forEach(it=>{
+      const el=document.createElement(it.url?"a":"div");
+      el.className="grow";
+      if(it.url){ el.href=it.url; el.target="_blank"; el.rel="noopener"; }
+      el.innerHTML=`<span class="gsev" style="color:${gravColor(it.sev)}">${it.sev}</span>
+        <span class="gtxt"><strong>${esc(it.title)}</strong>
+        <small>${esc(it.label)}${it.ts?` · ${esc(it.ts)}`:""} · ${esc(it.tier)}${it.kw?` · "${esc(it.kw)}"`:""}</small></span>`;
+      wrap.appendChild(el);
+    });
+  }
+
+  function renderGravity(d){
+    const g=d.gravity;
+    if(g && g.items && g.items.length){
+      setGravity(g.index||0);
+      renderGravityItems(g.items);
+      document.getElementById("gravCount").textContent =
+        d.live ? ((g.count||g.items.length)+" koppen gescand") : "voorbeeld";
+      document.getElementById("headCount").textContent =
+        g.items.length + " recentste";
+    }else{
+      setGravity(0);
+      document.getElementById("gravCount").textContent="nog geen data";
+      document.getElementById("headCount").textContent="";
+      document.getElementById("glist").innerHTML=
+        '<div class="grow"><span class="gtxt"><strong>Nog geen ernst-data.</strong>'+
+        '<small>Draai de bijgewerkte engine om dit te vullen.</small></span></div>';
+    }
+  }
 
   // ---------- render: source cards ----------
   function renderSources(sources){
@@ -444,14 +572,15 @@
     // nulwaardes en ongeldige metingen tellen niet mee
     const valid=(sources||[]).filter(s=>Number.isFinite(s.oi) && s.oi>0);
     valid.forEach((s,i)=>{
-      const c=document.createElement("div");
+      const c=document.createElement(s.photo?"a":"div");
       c.className="card";
+      if(s.photo){ c.href=s.photo; c.target="_blank"; c.rel="noopener"; }
       c.style.opacity=0; c.style.transform="translateY(8px)";
       c.innerHTML=`
         <div class="src"><span class="name">${s.label}</span><span class="when">${s.ts||""}</span></div>
         <div class="swatch" style="background:${s.swatch}"></div>
         <div class="cardnum"><b>${s.oi.toFixed(1)}</b><small>/100</small></div>
-        <div class="cband">${bandOf(s.oi)}</div>`;
+        <div class="cband">${bandOf(s.oi)}${s.photo?'<span class="seephoto">bekijk foto ↗</span>':""}</div>`;
       wrap.appendChild(c);
       if(REDUCE){ c.style.opacity=1; c.style.transform="none"; return; }
       setTimeout(()=>{
@@ -461,8 +590,10 @@
     });
     document.getElementById("srcCount").textContent =
       valid.length + " bron" + (valid.length===1?"":"nen") + " gemeten";
-    const avg = valid.length ? valid.reduce((a,s)=>a+s.oi,0)/valid.length : 0;
-    setIndex(avg);
+    // mediaan i.p.v. gemiddelde: robuust tegen uitschieters (rare belichting, halve uitsnede)
+    const vals=valid.map(s=>s.oi).sort((a,b)=>a-b), m=Math.floor(vals.length/2);
+    const agg = !vals.length ? 0 : (vals.length%2 ? vals[m] : (vals[m-1]+vals[m])/2);
+    setIndex(agg);
   }
 
   // ---------- demo seed (clearly marked) ----------
@@ -475,11 +606,21 @@
       {id:"nyt", label:"NYT", oi:62.7, swatch:"#d57e38", ts:"demo"},
       {id:"bbcw", label:"BBC World", oi:55.0, swatch:"#d4824a", ts:"demo"},
       {id:"guard", label:"Guardian", oi:66.1, swatch:"#d27430", ts:"demo"}
-    ]
+    ],
+    gravity: {
+      index: 84, count: 0,
+      items: [
+        {label:"demo", sev:84, tier:"Oorlog / militair",   kw:"voorbeeld", title:"Voorbeeld: militaire dreiging (gevuld zodra de engine draait)", url:""},
+        {label:"demo", sev:54, tier:"Concrete maatregel",  kw:"voorbeeld", title:"Voorbeeld: aangekondigd beleid of maatregel", url:""},
+        {label:"demo", sev:24, tier:"Politiek rumoer",     kw:"voorbeeld", title:"Voorbeeld: verbale uithaal zonder direct gevolg", url:""},
+        {label:"demo", sev:8,  tier:"Triviaal",            kw:"voorbeeld", title:"Voorbeeld: triviaal nieuws (golf, diner)", url:""}
+      ]
+    }
   };
 
   function applyData(d){
     renderSources(d.sources);
+    renderGravity(d);
     const dt = d.updated ? new Date(d.updated) : null;
     document.getElementById("updated").textContent =
       "laatste meting: " + (dt ? dt.toLocaleString("nl-BE",{dateStyle:"short",timeStyle:"short"}) : "—");
