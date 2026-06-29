@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-29T22:58:17.814217+00:00",
+  "updated": "2026-06-29T23:13:06.221030+00:00",
   "live": true,
   "sources": [
     {
@@ -8,7 +8,7 @@
       "oi": 49.2,
       "swatch": "#c47e63",
       "photo": "https://a57.foxnews.com/static.foxnews.com/foxnews.com/content/uploads/2026/06/931/523/trump-speaks-at-a-podium.jpg?ve=1&tl=1",
-      "ts": "22:54"
+      "ts": "23:08"
     },
     {
       "id": "nyt",
@@ -16,31 +16,23 @@
       "oi": 10.3,
       "swatch": "#b4847b",
       "photo": "https://static01.nyt.com/images/2026/06/29/multimedia/29DC-HOUSING-fqpb/29DC-HOUSING-fqpb-mediumSquareAt3X.jpg",
-      "ts": "22:54"
-    },
-    {
-      "id": "nytw",
-      "label": "NYT World",
-      "oi": 3.7,
-      "swatch": "#f2dcb7",
-      "photo": "https://static01.nyt.com/images/2026/06/26/multimedia/00int-kazakhstan-us-01-thqw/00int-kazakhstan-us-01-thqw-mediumSquareAt3X.jpg",
-      "ts": "22:54"
+      "ts": "23:08"
     },
     {
       "id": "bbcus",
       "label": "BBC US",
-      "oi": 34.9,
-      "swatch": "#b48369",
+      "oi": 34.5,
+      "swatch": "#b38469",
       "photo": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/7b79/live/b1279970-73c5-11f1-a785-7f6fcfc76fe8.jpg",
-      "ts": "22:54"
+      "ts": "23:08"
     },
     {
       "id": "bbcw",
       "label": "BBC World",
-      "oi": 34.9,
-      "swatch": "#b48369",
+      "oi": 34.5,
+      "swatch": "#b38469",
       "photo": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/7b79/live/b1279970-73c5-11f1-a785-7f6fcfc76fe8.jpg",
-      "ts": "22:54"
+      "ts": "23:08"
     },
     {
       "id": "guard",
@@ -48,7 +40,7 @@
       "oi": 22.4,
       "swatch": "#d3a08a",
       "photo": "https://i.guim.co.uk/img/media/2f88ca819c333555cf48cc753b3282850569d664/407_0_2876_2302/master/2876.jpg?width=460&quality=85&auto=format&fit=max&s=4af6f446f208f3224eb92274b446b27d",
-      "ts": "22:54"
+      "ts": "23:08"
     },
     {
       "id": "aljaz",
@@ -56,7 +48,7 @@
       "oi": 21.6,
       "swatch": "#8f5f56",
       "photo": "https://www.aljazeera.com/wp-content/uploads/2026/06/ap_6a42cb998d8df-1782762393.jpg?resize=1920%2C1440",
-      "ts": "22:54"
+      "ts": "23:08"
     },
     {
       "id": "cbs",
@@ -64,13 +56,22 @@
       "oi": 21.0,
       "swatch": "#8c5d55",
       "photo": "https://assets2.cbsnewsstatic.com/hub/i/r/2026/01/22/ff436e69-7295-4bf7-bf49-b8d87331cf29/thumbnail/1200x630/292d690f49f6c3755bb605843b2ed010/cbsn-fusion-supreme-court-appears-skeptical-of-trumps-efforts-to-fire-lisa-cook-from-fed-board-thumbnail.jpg",
-      "ts": "22:56"
+      "ts": "23:10"
     }
   ],
   "gravity": {
     "index": 82,
-    "count": 560,
+    "count": 558,
     "items": [
+      {
+        "label": "Guardian",
+        "sev": 50,
+        "tier": "Concrete maatregel",
+        "kw": "deport",
+        "title": "Liberal supreme court justices condemn ‘destabilizing’ ruling that expands Trump’s power to fire regulators – live",
+        "url": "https://www.theguardian.com/us-news/live/2026/jun/29/supreme-court-donald-trump-administration-us-politics-latest-news-updates",
+        "ts": "29/06 22:46"
+      },
       {
         "label": "NYT",
         "sev": 15,
@@ -90,13 +91,13 @@
         "ts": "29/06 22:37"
       },
       {
-        "label": "Guardian",
-        "sev": 50,
-        "tier": "Concrete maatregel",
-        "kw": "deport",
-        "title": "Liberal supreme court justices condemn ‘destabilizing’ ruling that expands Trump’s power to fire regulators – live",
-        "url": "https://www.theguardian.com/us-news/live/2026/jun/29/supreme-court-donald-trump-administration-us-politics-latest-news-updates",
-        "ts": "29/06 22:28"
+        "label": "NBC",
+        "sev": 15,
+        "tier": "Onbepaald",
+        "kw": "",
+        "title": "Supreme Court hands Trump new power to tighten his grip on the federal government - NBC News",
+        "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNaXYyUmRFTzFHZVZKZ0U2WGs0eFRIcVhQZ25jMGJTMnlmbnQzUndxT1AyU204bTRCWEVVbEFQQU5vMHZIaVZwejhHVkFFMExzN2V5OEFtdUM2bHBTVFhzZ1R5NnVQRGRPOWt6WmZ3VkpRR01YRkxWckpVYWpDRTRTbnFPUTBucjk5Z2ZBeld4QWpMbTE1TUg0SFlCUjBzYzVSaGF6djdySFhtVDU2c2FTX2F5eERLcFA3eEdYdnp2Zw?oc=5",
+        "ts": "29/06 22:26"
       },
       {
         "label": "NYT",
@@ -106,6 +107,15 @@
         "title": "Trump on Legislation to Address the Nation’s Housing Crisis: ‘It’s a Yawn’",
         "url": "https://www.nytimes.com/2026/06/29/us/politics/trump-housing-bill.html",
         "ts": "29/06 22:21"
+      },
+      {
+        "label": "The Hill",
+        "sev": 15,
+        "tier": "Onbepaald",
+        "kw": "",
+        "title": "NYT’s Haberman, Swan: Trump ‘answers more questions than Joe Biden’ - The Hill",
+        "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNV0xWSzdLN1AzYU01ZWhwaTl6T0pXUmc2VWJYZUZLTi1hVXUzbVZqN014and2V2ZGNWNHSElRMFJfWDZ6UTNTbUlOWXR5d2ZqLVhLNTRYejhzd2JYWXlVQmY1QXZNWWNXYnRFT1ppcGVnMC1wTkgtcE4wRmo5ZlpSRDBuLUpfeFhHU0g00gGQAUFVX3lxTE5jal9EVm42Tk4zQlRvZlJDTTdGcnJBNWdOVGJXNkF4ZkQ4TzZ1NFZ0RmFSUGxZY18wWHVqUUJwRW5yU2xfUnE4OVFVR1F6RkFVLUE3TTJLbTVfQnBsYk81UWRINkdFeVhOTHNFdDVMbDdJVkh5Q3ZGaDVjNDNTVjFEUk1UeWV5NURTWEloNnV5Qg?oc=5",
+        "ts": "29/06 22:19"
       },
       {
         "label": "NYT",
@@ -130,7 +140,7 @@
         "sev": 50,
         "tier": "Concrete maatregel",
         "kw": "fired",
-        "title": "Justices Expand Trump’s Power to Fire Officials",
+        "title": "Supreme Court Expands Trump’s Power to Fire Officials but Prevents Lisa Cook Removal",
         "url": "https://www.nytimes.com/2026/06/29/us/politics/supreme-court-independent-regulator-firings.html",
         "ts": "29/06 22:04"
       },
@@ -142,39 +152,21 @@
         "title": "Hoe Trump de Amerikaanse geschiedenis vervalst: \"Over de segregatie van zwarten gaan we toch niet leuteren, vindt hij\" - De Standaard",
         "url": "https://news.google.com/rss/articles/CBMigAJBVV95cUxNaU55Qkp5QXJJT1E0QmE2eDBZUlF0cnduVXI5d1BBWU8yRUp1eTh0Q1o5U1lqVkwxRmFKUjlYTUJJWHlxYnA1MDQyMkZ4TFJKS1ZaYmdhTi1zT19ELVloVjItWlpNeG9BblN6U0hYOFpJZzYwT3hQNmVPN0pqSTBMNkxISzB6YnJ0SmhwSkVFRFN3dzIxWlR2YVNhWFk5N0JPRzBfWk5vV2NuSEZpRWZURm1MNUtKdHF6S0RZSlFFSHU0VGM0VXBWMEVWc2I4Rm13dFFmRFpRVHRWZjBwYnFmOGVuT3RTRGtyQjd3dmctZXhfZFJKSEZ6bm0yZWZ0Qmhp?oc=5",
         "ts": "29/06 22:02"
-      },
-      {
-        "label": "Politico",
-        "sev": 15,
-        "tier": "Onbepaald",
-        "kw": "",
-        "title": "Trump's AI controls spark free speech debate - Politico",
-        "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNbGQ4VHZMV0hpR1Q3V1FmVWxvbEVtUy1DQkNkcFpKVENFZWhVdVZQblF5WVlZaFU2UU1aQ1c5ajZMLXFNU1VxY2psR1hWNU9Sb0UxSTZWMDFHMWFNOGRPUWZqd0NSWnMzNW5ya0xvVy00TjhTRFE5NjB4QXFpdzRaSHUzMkVUd2ZUOUQtQ3VaTU4?oc=5",
-        "ts": "29/06 21:32"
-      },
-      {
-        "label": "The Hill",
-        "sev": 15,
-        "tier": "Onbepaald",
-        "kw": "",
-        "title": "Dozens of states sue Trump administration over ‘frail’ Medicaid work requirement exemption - The Hill",
-        "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOYjl3aXlqTHU5cFk1Vl8yOUE5V21iU1dPS2pkMjhIODVBb2FJdEpWdGJRc2F1OU1CWUlFcy10MmxBamFtMWpCTTV1U3kyeVNoVTFyX1FDMHVmQ2JzNjgySW93cTRzbkxZc01PWk9faDNXRDFmWjR6aTFxV0RadmdUZGFrQjZXclnSAYwBQVVfeXFMT1hqN0VmUC11aEhscDVGV1VwVjlQSkh5ak5CRkFENFdNVDlwM2dxVUNDU2c3QTZIWHZDeFBPeHlOREFFZHF2S3oweE1xU0I2OW1yN3ViLTRIVEpWYUJxT1BFRlVCVnJodVRneWc5MEtTRTN2RkFMSzV1cEtiOXVGRm14RXlNaTdkc0kyWUI?oc=5",
-        "ts": "29/06 21:25"
       }
     ]
   },
   "volume": {
     "by_hour": [
-      29,
+      32,
       26,
-      9,
+      10,
       7,
       5,
       12,
       11,
       7,
       3,
-      121,
+      124,
       7,
       14,
       26,
@@ -188,25 +180,25 @@
       25,
       29,
       40,
-      32
+      33
     ],
     "by_weekday": [
-      139,
-      67,
+      141,
+      70,
       81,
-      77,
-      71,
+      79,
+      72,
       61,
       64
     ],
     "by_week_of_month": [
       20,
-      37,
-      58,
-      332,
-      113
+      38,
+      60,
+      333,
+      117
     ],
-    "total": 560,
+    "total": 568,
     "since": "2026-06-29",
     "tz": "Europe/Brussels"
   }

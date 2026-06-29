@@ -1,15 +1,15 @@
 {
   "by_hour": [
-    29,
+    32,
     26,
-    9,
+    10,
     7,
     5,
     12,
     11,
     7,
     3,
-    121,
+    124,
     7,
     14,
     26,
@@ -23,25 +23,25 @@
     25,
     29,
     40,
-    32
+    33
   ],
   "by_weekday": [
-    139,
-    67,
+    141,
+    70,
     81,
-    77,
-    71,
+    79,
+    72,
     61,
     64
   ],
   "by_week_of_month": [
     20,
-    37,
-    58,
-    332,
-    113
+    38,
+    60,
+    333,
+    117
   ],
-  "total": 560,
+  "total": 568,
   "seen": {
     "another trump administration payment to stop offshore wind farm": "2026-06-29T22:58:17.811765+00:00",
     "supreme court says fed’s cook can keep her job for now, but it upholds other tru": "2026-06-29T22:58:17.811765+00:00",
@@ -602,8 +602,16 @@
     "trump eist zijn plaats op - nos": "2026-06-29T22:58:17.811765+00:00",
     "trump on tour in europa: vaticaanstad - nos": "2026-06-29T22:58:17.811765+00:00",
     "politics news: latest on trump administration, congress, elections and more - nb": "2026-06-29T22:58:17.811765+00:00",
-    "republikeinen zitten met trump in hun maag - nos": "2026-06-29T22:58:17.811765+00:00"
+    "republikeinen zitten met trump in hun maag - nos": "2026-06-29T22:58:17.811765+00:00",
+    "supreme court hands trump new power to tighten his grip on the federal governmen": "2026-06-29T23:13:06.220002+00:00",
+    "nyt’s haberman, swan: trump ‘answers more questions than joe biden’ - the hill": "2026-06-29T23:13:06.220002+00:00",
+    "supreme court expands trump’s power to fire officials but prevents lisa cook rem": "2026-06-29T23:13:06.220002+00:00",
+    "democrats in half of states sue trump administration over medicaid work rules - ": "2026-06-29T23:13:06.220002+00:00",
+    "nato chief presents ‘trump trillion’ chart on european defense spending | cnn po": "2026-06-29T23:13:06.220002+00:00",
+    "trump administration to phase out hiv funding for south africa - politico": "2026-06-29T23:13:06.220002+00:00",
+    "donald trump celebrates 80th birthday with white house cage fight - sky news": "2026-06-29T23:13:06.220002+00:00",
+    "'there's trump's world and then there's the real world' - sky news": "2026-06-29T23:13:06.220002+00:00"
   },
   "since": "2026-06-29",
-  "updated": "2026-06-29T22:58:17.811765+00:00"
+  "updated": "2026-06-29T23:13:06.220002+00:00"
 }
