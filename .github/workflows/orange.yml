@@ -1,12 +1,12 @@
-name: Trump Oranje-Index
+name: T.A.N.G.O. — dagelijkse meting
 
 on:
   schedule:
-    - cron: "0 */6 * * *"
-  workflow_dispatch:
+    - cron: "0 6 * * *"        # elke dag 06:00 UTC (≈ 08:00 BE zomertijd)
+  workflow_dispatch:            # knop om handmatig te draaien
 
 permissions:
-  contents: write
+  contents: write              # nodig om data.json terug te committen
 
 jobs:
   meet:
@@ -29,6 +29,11 @@ jobs:
           git config user.name  "orange-bot"
           git config user.email "bot@users.noreply.github.com"
           git add data.json
+          git diff --staged --quiet && echo "Niets gewijzigd" && exit 0
+          git commit -m "T.A.N.G.O. update"
+          git pull --rebase --autostash
+          git push
+
           git diff --staged --quiet && echo "Niets gewijzigd" && exit 0
           git commit -m "Oranje-index update"
           git pull --rebase --autostash
