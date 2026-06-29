@@ -1,148 +1,85 @@
 {
-  "updated": "2026-06-29T22:40:53.663797+00:00",
+  "updated": "2026-06-29T22:58:17.814217+00:00",
   "live": true,
   "sources": [
     {
       "id": "fox",
       "label": "FOX",
-      "oi": 32.0,
-      "swatch": "#b37d6c",
+      "oi": 49.2,
+      "swatch": "#c47e63",
       "photo": "https://a57.foxnews.com/static.foxnews.com/foxnews.com/content/uploads/2026/06/931/523/trump-speaks-at-a-podium.jpg?ve=1&tl=1",
-      "ts": "22:38"
+      "ts": "22:54"
     },
     {
       "id": "nyt",
       "label": "NYT",
-      "oi": 25.0,
-      "swatch": "#b28572",
+      "oi": 10.3,
+      "swatch": "#b4847b",
       "photo": "https://static01.nyt.com/images/2026/06/29/multimedia/29DC-HOUSING-fqpb/29DC-HOUSING-fqpb-mediumSquareAt3X.jpg",
-      "ts": "22:38"
+      "ts": "22:54"
     },
     {
       "id": "nytw",
       "label": "NYT World",
-      "oi": 10.0,
-      "swatch": "#8f7667",
-      "photo": "https://static01.nyt.com/images/2026/06/17/00int-kazakhstan-trump-video-94217-cover/00int-kazakhstan-trump-video-94217-cover-mediumSquareAt3X.jpg",
-      "ts": "22:38"
+      "oi": 3.7,
+      "swatch": "#f2dcb7",
+      "photo": "https://static01.nyt.com/images/2026/06/26/multimedia/00int-kazakhstan-us-01-thqw/00int-kazakhstan-us-01-thqw-mediumSquareAt3X.jpg",
+      "ts": "22:54"
     },
     {
       "id": "bbcus",
       "label": "BBC US",
-      "oi": 15.4,
-      "swatch": "#ba8f80",
-      "photo": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/6822/live/fe2df4d0-7401-11f1-8e1d-bbbb1017d210.jpg",
-      "ts": "22:38"
+      "oi": 34.9,
+      "swatch": "#b48369",
+      "photo": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/7b79/live/b1279970-73c5-11f1-a785-7f6fcfc76fe8.jpg",
+      "ts": "22:54"
     },
     {
       "id": "bbcw",
       "label": "BBC World",
-      "oi": 26.7,
-      "swatch": "#b78b73",
+      "oi": 34.9,
+      "swatch": "#b48369",
       "photo": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/7b79/live/b1279970-73c5-11f1-a785-7f6fcfc76fe8.jpg",
-      "ts": "22:38"
+      "ts": "22:54"
     },
     {
       "id": "guard",
       "label": "Guardian",
-      "oi": 0.0,
-      "swatch": "#dca1a5",
-      "photo": "https://i.guim.co.uk/img/media/faa1537b51799d6555c55744d81f28091d18bf31/1131_0_6467_5174/master/6467.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=348f54395c1f85d3d778e934b80366b0",
-      "ts": "22:38"
+      "oi": 22.4,
+      "swatch": "#d3a08a",
+      "photo": "https://i.guim.co.uk/img/media/2f88ca819c333555cf48cc753b3282850569d664/407_0_2876_2302/master/2876.jpg?width=460&quality=85&auto=format&fit=max&s=4af6f446f208f3224eb92274b446b27d",
+      "ts": "22:54"
     },
     {
       "id": "aljaz",
       "label": "Al Jazeera",
-      "oi": 29.1,
-      "swatch": "#98695c",
+      "oi": 21.6,
+      "swatch": "#8f5f56",
       "photo": "https://www.aljazeera.com/wp-content/uploads/2026/06/ap_6a42cb998d8df-1782762393.jpg?resize=1920%2C1440",
-      "ts": "22:38"
+      "ts": "22:54"
     },
     {
       "id": "cbs",
       "label": "CBS",
-      "oi": 31.7,
-      "swatch": "#8e6053",
+      "oi": 21.0,
+      "swatch": "#8c5d55",
       "photo": "https://assets2.cbsnewsstatic.com/hub/i/r/2026/01/22/ff436e69-7295-4bf7-bf49-b8d87331cf29/thumbnail/1200x630/292d690f49f6c3755bb605843b2ed010/cbsn-fusion-supreme-court-appears-skeptical-of-trumps-efforts-to-fire-lisa-cook-from-fed-board-thumbnail.jpg",
-      "ts": "22:40"
-    },
-    {
-      "id": "cnn",
-      "label": "CNN",
-      "oi": 61.5,
-      "swatch": "#a26647",
-      "photo": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
-      "ts": "22:40"
-    },
-    {
-      "id": "reuters",
-      "label": "Reuters",
-      "oi": 61.5,
-      "swatch": "#a26647",
-      "photo": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
-      "ts": "22:40"
-    },
-    {
-      "id": "ap",
-      "label": "AP",
-      "oi": 61.5,
-      "swatch": "#a26647",
-      "photo": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
-      "ts": "22:40"
-    },
-    {
-      "id": "poli",
-      "label": "Politico",
-      "oi": 61.5,
-      "swatch": "#a26647",
-      "photo": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
-      "ts": "22:40"
-    },
-    {
-      "id": "hill",
-      "label": "The Hill",
-      "oi": 61.5,
-      "swatch": "#a26647",
-      "photo": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
-      "ts": "22:40"
-    },
-    {
-      "id": "nbc",
-      "label": "NBC",
-      "oi": 61.5,
-      "swatch": "#a26647",
-      "photo": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
-      "ts": "22:40"
-    },
-    {
-      "id": "sky",
-      "label": "Sky News",
-      "oi": 61.5,
-      "swatch": "#a26647",
-      "photo": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
-      "ts": "22:40"
-    },
-    {
-      "id": "destd",
-      "label": "De Standaard",
-      "oi": 61.5,
-      "swatch": "#a26647",
-      "photo": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
-      "ts": "22:40"
-    },
-    {
-      "id": "nos",
-      "label": "NOS",
-      "oi": 61.5,
-      "swatch": "#a26647",
-      "photo": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
-      "ts": "22:40"
+      "ts": "22:56"
     }
   ],
   "gravity": {
     "index": 82,
-    "count": 559,
+    "count": 560,
     "items": [
+      {
+        "label": "NYT",
+        "sev": 15,
+        "tier": "Onbepaald",
+        "kw": "",
+        "title": "Another Trump Administration Payment to Stop Offshore Wind Farm",
+        "url": "https://www.nytimes.com/2026/06/29/climate/trump-offshore-wind-duke-energy.html",
+        "ts": "29/06 22:41"
+      },
       {
         "label": "AP",
         "sev": 15,
@@ -154,7 +91,7 @@
       },
       {
         "label": "Guardian",
-        "sev": 52,
+        "sev": 50,
         "tier": "Concrete maatregel",
         "kw": "deport",
         "title": "Liberal supreme court justices condemn ‘destabilizing’ ruling that expands Trump’s power to fire regulators – live",
@@ -172,7 +109,7 @@
       },
       {
         "label": "NYT",
-        "sev": 52,
+        "sev": 50,
         "tier": "Concrete maatregel",
         "kw": "fired",
         "title": "Trump Renews Threat to Fire Fed Governor Lisa Cook After Supreme Court Ruling",
@@ -190,7 +127,7 @@
       },
       {
         "label": "NYT",
-        "sev": 52,
+        "sev": 50,
         "tier": "Concrete maatregel",
         "kw": "fired",
         "title": "Justices Expand Trump’s Power to Fire Officials",
@@ -223,16 +160,54 @@
         "title": "Dozens of states sue Trump administration over ‘frail’ Medicaid work requirement exemption - The Hill",
         "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOYjl3aXlqTHU5cFk1Vl8yOUE5V21iU1dPS2pkMjhIODVBb2FJdEpWdGJRc2F1OU1CWUlFcy10MmxBamFtMWpCTTV1U3kyeVNoVTFyX1FDMHVmQ2JzNjgySW93cTRzbkxZc01PWk9faDNXRDFmWjR6aTFxV0RadmdUZGFrQjZXclnSAYwBQVVfeXFMT1hqN0VmUC11aEhscDVGV1VwVjlQSkh5ak5CRkFENFdNVDlwM2dxVUNDU2c3QTZIWHZDeFBPeHlOREFFZHF2S3oweE1xU0I2OW1yN3ViLTRIVEpWYUJxT1BFRlVCVnJodVRneWc5MEtTRTN2RkFMSzV1cEtiOXVGRm14RXlNaTdkc0kyWUI?oc=5",
         "ts": "29/06 21:25"
-      },
-      {
-        "label": "FOX",
-        "sev": 36,
-        "tier": "Beleidssignaal",
-        "kw": "demands",
-        "title": "Trump unloads after Supreme Court upholds late mail-in ballots in Mississippi",
-        "url": "https://www.foxnews.com/politics/trump-unloads-supreme-court-upholds-late-mail-in-ballots-mississippi",
-        "ts": "29/06 21:22"
       }
     ]
+  },
+  "volume": {
+    "by_hour": [
+      29,
+      26,
+      9,
+      7,
+      5,
+      12,
+      11,
+      7,
+      3,
+      121,
+      7,
+      14,
+      26,
+      11,
+      16,
+      14,
+      30,
+      22,
+      38,
+      26,
+      25,
+      29,
+      40,
+      32
+    ],
+    "by_weekday": [
+      139,
+      67,
+      81,
+      77,
+      71,
+      61,
+      64
+    ],
+    "by_week_of_month": [
+      20,
+      37,
+      58,
+      332,
+      113
+    ],
+    "total": 560,
+    "since": "2026-06-29",
+    "tz": "Europe/Brussels"
   }
 }
