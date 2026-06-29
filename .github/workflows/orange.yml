@@ -2,11 +2,11 @@ name: T.A.N.G.O. — dagelijkse meting
 
 on:
   schedule:
-    - cron: "0 6 * * *"        # elke dag 06:00 UTC (≈ 08:00 BE zomertijd)
-  workflow_dispatch:            # knop om handmatig te draaien
+    - cron: "0 6 * * *"
+  workflow_dispatch:
 
 permissions:
-  contents: write              # nodig om data.json terug te committen
+  contents: write
 
 jobs:
   meet:
@@ -24,16 +24,11 @@ jobs:
       - name: Meet de oranjegraad
         run: python orange_engine.py
 
-       - name: Commit data.json
+      - name: Commit data.json
         run: |
           git config user.name  "orange-bot"
           git config user.email "bot@users.noreply.github.com"
           git add data.json
           git diff --staged --quiet && echo "Niets gewijzigd" && exit 0
-          git stash
-          git pull --rebase
-          git stash pop || true
-          git checkout --theirs data.json 2>/dev/null || true
-          git add data.json
           git commit -m "T.A.N.G.O. update"
-          git push
+          git push origin HEAD:main
