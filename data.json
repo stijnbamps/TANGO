@@ -1,190 +1,182 @@
 {
-  "updated": "2026-06-29T23:13:06.221030+00:00",
+  "updated": "2026-06-30T09:46:25.984119+00:00",
   "live": true,
   "sources": [
     {
       "id": "fox",
       "label": "FOX",
-      "oi": 49.2,
-      "swatch": "#c47e63",
-      "photo": "https://a57.foxnews.com/static.foxnews.com/foxnews.com/content/uploads/2026/06/931/523/trump-speaks-at-a-podium.jpg?ve=1&tl=1",
-      "ts": "23:08"
+      "oi": 27.2,
+      "swatch": "#bc8a76",
+      "photo": "https://a57.foxnews.com/static.foxnews.com/foxnews.com/content/uploads/2026/06/931/523/keith-sonderling-may-2026.jpg?ve=1&tl=1",
+      "ts": "09:41"
     },
     {
       "id": "nyt",
       "label": "NYT",
-      "oi": 10.3,
-      "swatch": "#b4847b",
-      "photo": "https://static01.nyt.com/images/2026/06/29/multimedia/29DC-HOUSING-fqpb/29DC-HOUSING-fqpb-mediumSquareAt3X.jpg",
-      "ts": "23:08"
+      "oi": 10.1,
+      "swatch": "#b4847c",
+      "photo": "https://static01.nyt.com/images/2026/06/29/multimedia/29DC-HOUSING-fqpb/29DC-HOUSING-fqpb-mediumSquareAt3X-v2.jpg",
+      "ts": "09:41"
     },
     {
       "id": "bbcus",
       "label": "BBC US",
-      "oi": 34.5,
-      "swatch": "#b38469",
-      "photo": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/7b79/live/b1279970-73c5-11f1-a785-7f6fcfc76fe8.jpg",
-      "ts": "23:08"
+      "oi": 39.9,
+      "swatch": "#997155",
+      "photo": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/ea62/live/7a927010-17db-11f1-992f-8778a9867203.jpg",
+      "ts": "09:41"
     },
     {
       "id": "bbcw",
       "label": "BBC World",
-      "oi": 34.5,
-      "swatch": "#b38469",
-      "photo": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/7b79/live/b1279970-73c5-11f1-a785-7f6fcfc76fe8.jpg",
-      "ts": "23:08"
+      "oi": 39.9,
+      "swatch": "#997155",
+      "photo": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/ea62/live/7a927010-17db-11f1-992f-8778a9867203.jpg",
+      "ts": "09:41"
     },
     {
       "id": "guard",
       "label": "Guardian",
-      "oi": 22.4,
-      "swatch": "#d3a08a",
-      "photo": "https://i.guim.co.uk/img/media/2f88ca819c333555cf48cc753b3282850569d664/407_0_2876_2302/master/2876.jpg?width=460&quality=85&auto=format&fit=max&s=4af6f446f208f3224eb92274b446b27d",
-      "ts": "23:08"
-    },
-    {
-      "id": "aljaz",
-      "label": "Al Jazeera",
-      "oi": 21.6,
-      "swatch": "#8f5f56",
-      "photo": "https://www.aljazeera.com/wp-content/uploads/2026/06/ap_6a42cb998d8df-1782762393.jpg?resize=1920%2C1440",
-      "ts": "23:08"
+      "oi": 57.5,
+      "swatch": "#c08058",
+      "photo": "https://i.guim.co.uk/img/media/527b41516ec06124d10a96d712ffc9aeb33ea867/0_656_3600_2880/master/3600.jpg?width=460&quality=85&auto=format&fit=max&s=9529f2eeae3baa330a5d1a61f4c06d3c",
+      "ts": "09:41"
     },
     {
       "id": "cbs",
       "label": "CBS",
-      "oi": 21.0,
-      "swatch": "#8c5d55",
-      "photo": "https://assets2.cbsnewsstatic.com/hub/i/r/2026/01/22/ff436e69-7295-4bf7-bf49-b8d87331cf29/thumbnail/1200x630/292d690f49f6c3755bb605843b2ed010/cbsn-fusion-supreme-court-appears-skeptical-of-trumps-efforts-to-fire-lisa-cook-from-fed-board-thumbnail.jpg",
-      "ts": "23:10"
+      "oi": 29.3,
+      "swatch": "#b0816c",
+      "photo": "https://assets1.cbsnewsstatic.com/hub/i/r/2026/06/29/f0406561-53f8-489d-83ee-4d875d5e5caa/thumbnail/1200x630/4e387ce0cce3cbff2d5a373b2dd36cf6/gettyimages-2276585881.jpg",
+      "ts": "09:43"
     }
   ],
   "gravity": {
     "index": 82,
-    "count": 558,
+    "count": 63,
     "items": [
       {
         "label": "Guardian",
-        "sev": 50,
-        "tier": "Concrete maatregel",
-        "kw": "deport",
-        "title": "Liberal supreme court justices condemn ‘destabilizing’ ruling that expands Trump’s power to fire regulators – live",
-        "url": "https://www.theguardian.com/us-news/live/2026/jun/29/supreme-court-donald-trump-administration-us-politics-latest-news-updates",
-        "ts": "29/06 22:46"
-      },
-      {
-        "label": "NYT",
         "sev": 15,
         "tier": "Onbepaald",
         "kw": "",
-        "title": "Another Trump Administration Payment to Stop Offshore Wind Farm",
-        "url": "https://www.nytimes.com/2026/06/29/climate/trump-offshore-wind-duke-energy.html",
-        "ts": "29/06 22:41"
-      },
-      {
-        "label": "AP",
-        "sev": 15,
-        "tier": "Onbepaald",
-        "kw": "",
-        "title": "Supreme Court says Fed’s Cook can keep her job for now, but it upholds other Trump firings - AP News",
-        "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPNUpHUThVcUFPblZQMHFjVWs4NEpSRDl4bHFvZFpLYVN5MWdtR2MxQ3ZVLWRSZGZhWlVxTnpjVllmakdvbHRuSTlIVW5qQUN3Y0VDNEUxWlNOUC1JbmJPSDc4NFFVNkY5c09jYjFuWjNSLW9jTFdWQTJaWmhCUEFFakNndXJ0cE93bHZ1S1NTVm0yZFR2X1BGSURTMEZORDhmVVhHa3FicHF5UUk?oc=5",
-        "ts": "29/06 22:37"
-      },
-      {
-        "label": "NBC",
-        "sev": 15,
-        "tier": "Onbepaald",
-        "kw": "",
-        "title": "Supreme Court hands Trump new power to tighten his grip on the federal government - NBC News",
-        "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNaXYyUmRFTzFHZVZKZ0U2WGs0eFRIcVhQZ25jMGJTMnlmbnQzUndxT1AyU204bTRCWEVVbEFQQU5vMHZIaVZwejhHVkFFMExzN2V5OEFtdUM2bHBTVFhzZ1R5NnVQRGRPOWt6WmZ3VkpRR01YRkxWckpVYWpDRTRTbnFPUTBucjk5Z2ZBeld4QWpMbTE1TUg0SFlCUjBzYzVSaGF6djdySFhtVDU2c2FTX2F5eERLcFA3eEdYdnp2Zw?oc=5",
-        "ts": "29/06 22:26"
-      },
-      {
-        "label": "NYT",
-        "sev": 15,
-        "tier": "Onbepaald",
-        "kw": "",
-        "title": "Trump on Legislation to Address the Nation’s Housing Crisis: ‘It’s a Yawn’",
-        "url": "https://www.nytimes.com/2026/06/29/us/politics/trump-housing-bill.html",
-        "ts": "29/06 22:21"
-      },
-      {
-        "label": "The Hill",
-        "sev": 15,
-        "tier": "Onbepaald",
-        "kw": "",
-        "title": "NYT’s Haberman, Swan: Trump ‘answers more questions than Joe Biden’ - The Hill",
-        "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNV0xWSzdLN1AzYU01ZWhwaTl6T0pXUmc2VWJYZUZLTi1hVXUzbVZqN014and2V2ZGNWNHSElRMFJfWDZ6UTNTbUlOWXR5d2ZqLVhLNTRYejhzd2JYWXlVQmY1QXZNWWNXYnRFT1ppcGVnMC1wTkgtcE4wRmo5ZlpSRDBuLUpfeFhHU0g00gGQAUFVX3lxTE5jal9EVm42Tk4zQlRvZlJDTTdGcnJBNWdOVGJXNkF4ZkQ4TzZ1NFZ0RmFSUGxZY18wWHVqUUJwRW5yU2xfUnE4OVFVR1F6RkFVLUE3TTJLbTVfQnBsYk81UWRINkdFeVhOTHNFdDVMbDdJVkh5Q3ZGaDVjNDNTVjFEUk1UeWV5NURTWEloNnV5Qg?oc=5",
-        "ts": "29/06 22:19"
-      },
-      {
-        "label": "NYT",
-        "sev": 50,
-        "tier": "Concrete maatregel",
-        "kw": "fired",
-        "title": "Trump Renews Threat to Fire Fed Governor Lisa Cook After Supreme Court Ruling",
-        "url": "https://www.nytimes.com/2026/06/29/us/politics/trump-fire-fed-governor-cook.html",
-        "ts": "29/06 22:18"
+        "title": "Anger at supreme court ruling on Trump’s power to fire agency chiefs – US politics live",
+        "url": "https://www.theguardian.com/us-news/live/2026/jun/30/birthright-citizenship-supreme-court-donald-trump-us-politics-latest-news",
+        "ts": "30/06 09:28"
       },
       {
         "label": "NYT World",
         "sev": 15,
         "tier": "Onbepaald",
         "kw": "",
-        "title": "Mideast Live Updates: U.S. and Iran Set for New Talks in Qatar, Trump Says",
-        "url": "https://www.nytimes.com/live/2026/06/29/world/hormuz-us-iran-strikes",
-        "ts": "29/06 22:04"
+        "title": "Mideast Live Updates: U.S. and Iran Offer Conflicting Plans for Doha Talks",
+        "url": "https://www.nytimes.com/live/2026/06/30/world/iran-us-talks-qatar-hormuz",
+        "ts": "30/06 09:28"
       },
       {
-        "label": "NYT",
+        "label": "Guardian",
+        "sev": 15,
+        "tier": "Onbepaald",
+        "kw": "",
+        "title": "Alleged Epstein victim and Trump accuser living in fear of retaliation, relative says",
+        "url": "https://www.theguardian.com/us-news/2026/jun/30/alleged-epstein-victim-trump-accuser",
+        "ts": "30/06 09:00"
+      },
+      {
+        "label": "Guardian",
         "sev": 50,
         "tier": "Concrete maatregel",
         "kw": "fired",
-        "title": "Supreme Court Expands Trump’s Power to Fire Officials but Prevents Lisa Cook Removal",
-        "url": "https://www.nytimes.com/2026/06/29/us/politics/supreme-court-independent-regulator-firings.html",
-        "ts": "29/06 22:04"
+        "title": "The supreme court has again undermined the power of Congress | Moira Donegan",
+        "url": "https://www.theguardian.com/commentisfree/2026/jun/30/supreme-court-trump-v-slaughter",
+        "ts": "30/06 09:00"
       },
       {
-        "label": "De Standaard",
+        "label": "NPR",
+        "sev": 34,
+        "tier": "Beleidssignaal / dreiging",
+        "kw": "weighs",
+        "title": "Inside the coordinated strategy to radically reshape U.S. immigration",
+        "url": "https://www.npr.org/2026/06/30/g-s1-129953/remaking-immigration-explainer-video",
+        "ts": "30/06 09:00"
+      },
+      {
+        "label": "NYT World",
+        "sev": 15,
+        "tier": "Onbepaald",
+        "kw": "",
+        "title": "What the U.S. Owes Venezuela",
+        "url": "https://www.nytimes.com/2026/06/29/world/venezuela-earthquake-trump-aid.html",
+        "ts": "30/06 04:44"
+      },
+      {
+        "label": "Al Jazeera",
         "sev": 82,
         "tier": "Oorlog / militair",
         "kw": "war",
-        "title": "Hoe Trump de Amerikaanse geschiedenis vervalst: \"Over de segregatie van zwarten gaan we toch niet leuteren, vindt hij\" - De Standaard",
-        "url": "https://news.google.com/rss/articles/CBMigAJBVV95cUxNaU55Qkp5QXJJT1E0QmE2eDBZUlF0cnduVXI5d1BBWU8yRUp1eTh0Q1o5U1lqVkwxRmFKUjlYTUJJWHlxYnA1MDQyMkZ4TFJKS1ZaYmdhTi1zT19ELVloVjItWlpNeG9BblN6U0hYOFpJZzYwT3hQNmVPN0pqSTBMNkxISzB6YnJ0SmhwSkVFRFN3dzIxWlR2YVNhWFk5N0JPRzBfWk5vV2NuSEZpRWZURm1MNUtKdHF6S0RZSlFFSHU0VGM0VXBWMEVWc2I4Rm13dFFmRFpRVHRWZjBwYnFmOGVuT3RTRGtyQjd3dmctZXhfZFJKSEZ6bm0yZWZ0Qmhp?oc=5",
-        "ts": "29/06 22:02"
+        "title": "Trump tells US petrol retailers to reduce prices ‘immediately’",
+        "url": "https://www.aljazeera.com/economy/2026/6/30/trump-tells-us-petrol-retailers-to-reduce-prices-immediately?traffic_source=rss",
+        "ts": "30/06 04:11"
+      },
+      {
+        "label": "Guardian",
+        "sev": 50,
+        "tier": "Concrete maatregel",
+        "kw": "deport",
+        "title": "Liberal supreme court justices condemn ‘destabilizing’ ruling that expands Trump’s power to fire regulators – as it happened",
+        "url": "https://www.theguardian.com/us-news/live/2026/jun/29/supreme-court-donald-trump-administration-us-politics-latest-news-updates",
+        "ts": "30/06 02:07"
+      },
+      {
+        "label": "Guardian",
+        "sev": 15,
+        "tier": "Onbepaald",
+        "kw": "",
+        "title": "Trump news at a glance: Trump tried to appeal E Jean Carroll verdict all the way to the supreme court. They passed",
+        "url": "https://www.theguardian.com/us-news/2026/jun/29/trump-news-at-a-glance-e-jean-carroll",
+        "ts": "30/06 01:03"
+      },
+      {
+        "label": "FOX",
+        "sev": 15,
+        "tier": "Onbepaald",
+        "kw": "",
+        "title": "Trump taps acting Labor Secretary Keith Sonderling for permanent role pending Senate confirmation",
+        "url": "https://www.foxnews.com/politics/trump-taps-acting-labor-secretary-keith-sonderling-permanent-role-pending-senate-confirmation",
+        "ts": "30/06 00:50"
       }
     ]
   },
   "volume": {
     "by_hour": [
       32,
-      26,
-      10,
-      7,
+      28,
+      13,
+      8,
       5,
       12,
-      11,
+      12,
       7,
       3,
       124,
       7,
-      14,
+      19,
       26,
       11,
       16,
-      14,
+      15,
       30,
       22,
-      38,
+      39,
       26,
       25,
       29,
       40,
-      33
+      34
     ],
     "by_weekday": [
-      141,
-      70,
+      144,
+      82,
       81,
       79,
       72,
@@ -196,9 +188,9 @@
       38,
       60,
       333,
-      117
+      132
     ],
-    "total": 568,
+    "total": 583,
     "since": "2026-06-29",
     "tz": "Europe/Brussels"
   }
