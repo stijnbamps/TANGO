@@ -1,196 +1,204 @@
 {
-  "updated": "2026-06-30T09:46:25.984119+00:00",
+  "updated": "2026-07-01T09:58:00.912190+00:00",
   "live": true,
   "sources": [
     {
       "id": "fox",
       "label": "FOX",
-      "oi": 27.2,
-      "swatch": "#bc8a76",
-      "photo": "https://a57.foxnews.com/static.foxnews.com/foxnews.com/content/uploads/2026/06/931/523/keith-sonderling-may-2026.jpg?ve=1&tl=1",
-      "ts": "09:41"
+      "oi": 22.3,
+      "swatch": "#c98f80",
+      "photo": "https://a57.foxnews.com/static.foxnews.com/foxnews.com/content/uploads/2026/06/931/523/marco-rubio-us-embassy-new-delhi-fox-news-001.jpeg?ve=1&tl=1",
+      "ts": "09:53"
     },
     {
       "id": "nyt",
       "label": "NYT",
-      "oi": 10.1,
-      "swatch": "#b4847c",
-      "photo": "https://static01.nyt.com/images/2026/06/29/multimedia/29DC-HOUSING-fqpb/29DC-HOUSING-fqpb-mediumSquareAt3X-v2.jpg",
-      "ts": "09:41"
+      "oi": 6.1,
+      "swatch": "#bc8b85",
+      "photo": "https://static01.nyt.com/images/2026/06/30/multimedia/30dc-presidential-money01-photo-zmlg/30dc-presidential-money01-photo-zmlg-mediumSquareAt3X.jpg",
+      "ts": "09:53"
     },
     {
       "id": "bbcus",
       "label": "BBC US",
-      "oi": 39.9,
-      "swatch": "#997155",
-      "photo": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/ea62/live/7a927010-17db-11f1-992f-8778a9867203.jpg",
-      "ts": "09:41"
+      "oi": 16.0,
+      "swatch": "#bd9182",
+      "photo": "https://ichef.bbci.co.uk/ace/branded_news/1200/cpsprodpb/df73/live/87eda780-7518-11f1-8e1d-bbbb1017d210.jpg",
+      "ts": "09:53"
     },
     {
       "id": "bbcw",
       "label": "BBC World",
-      "oi": 39.9,
-      "swatch": "#997155",
-      "photo": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/ea62/live/7a927010-17db-11f1-992f-8778a9867203.jpg",
-      "ts": "09:41"
+      "oi": 16.0,
+      "swatch": "#bd9182",
+      "photo": "https://ichef.bbci.co.uk/ace/branded_news/1200/cpsprodpb/df73/live/87eda780-7518-11f1-8e1d-bbbb1017d210.jpg",
+      "ts": "09:53"
     },
     {
       "id": "guard",
       "label": "Guardian",
-      "oi": 57.5,
-      "swatch": "#c08058",
-      "photo": "https://i.guim.co.uk/img/media/527b41516ec06124d10a96d712ffc9aeb33ea867/0_656_3600_2880/master/3600.jpg?width=460&quality=85&auto=format&fit=max&s=9529f2eeae3baa330a5d1a61f4c06d3c",
-      "ts": "09:41"
+      "oi": 28.0,
+      "swatch": "#b47b6d",
+      "photo": "https://i.guim.co.uk/img/media/bc18af59728ad049a7566ee0e9969741d4afffac/1846_69_5630_4507/master/5630.jpg?width=700&quality=85&auto=format&fit=max&s=b6d5e0b15296f3181ff5b02043790f27",
+      "ts": "09:53"
+    },
+    {
+      "id": "aljaz",
+      "label": "Al Jazeera",
+      "oi": 0.1,
+      "swatch": "#cb9e9d",
+      "photo": "https://www.aljazeera.com/wp-content/uploads/2026/07/image-1782893968.jpg?resize=1918%2C1080&amp;quality=80",
+      "ts": "09:53"
     },
     {
       "id": "cbs",
       "label": "CBS",
-      "oi": 29.3,
-      "swatch": "#b0816c",
-      "photo": "https://assets1.cbsnewsstatic.com/hub/i/r/2026/06/29/f0406561-53f8-489d-83ee-4d875d5e5caa/thumbnail/1200x630/4e387ce0cce3cbff2d5a373b2dd36cf6/gettyimages-2276585881.jpg",
-      "ts": "09:43"
+      "oi": 47.0,
+      "swatch": "#a87357",
+      "photo": "https://assets1.cbsnewsstatic.com/hub/i/r/2026/06/30/8ce03c67-8004-4c93-96a1-5835ac90252e/thumbnail/1200x630/e505fc2d9a8ae9ff8401f71e0f9a6403/gettyimages-2236805445.jpg",
+      "ts": "09:54"
     }
   ],
   "gravity": {
-    "index": 82,
-    "count": 63,
+    "index": 66,
+    "count": 586,
     "items": [
       {
-        "label": "Guardian",
-        "sev": 15,
-        "tier": "Onbepaald",
-        "kw": "",
-        "title": "Anger at supreme court ruling on Trump’s power to fire agency chiefs – US politics live",
-        "url": "https://www.theguardian.com/us-news/live/2026/jun/30/birthright-citizenship-supreme-court-donald-trump-us-politics-latest-news",
-        "ts": "30/06 09:28"
-      },
-      {
         "label": "NYT World",
-        "sev": 15,
-        "tier": "Onbepaald",
-        "kw": "",
-        "title": "Mideast Live Updates: U.S. and Iran Offer Conflicting Plans for Doha Talks",
-        "url": "https://www.nytimes.com/live/2026/06/30/world/iran-us-talks-qatar-hormuz",
-        "ts": "30/06 09:28"
+        "sev": 66,
+        "tier": "Escalatie / crisis",
+        "kw": "crackdown",
+        "title": "Trump Suggestion of a Syrian Crackdown on Hezbollah Confounds Many in Mideast",
+        "url": "https://www.nytimes.com/2026/07/01/world/middleeast/syria-trump-hezbollah-lebanon.html",
+        "ts": "01/07 09:42"
       },
       {
-        "label": "Guardian",
-        "sev": 15,
-        "tier": "Onbepaald",
-        "kw": "",
-        "title": "Alleged Epstein victim and Trump accuser living in fear of retaliation, relative says",
-        "url": "https://www.theguardian.com/us-news/2026/jun/30/alleged-epstein-victim-trump-accuser",
-        "ts": "30/06 09:00"
-      },
-      {
-        "label": "Guardian",
+        "label": "NYT",
         "sev": 50,
         "tier": "Concrete maatregel",
-        "kw": "fired",
-        "title": "The supreme court has again undermined the power of Congress | Moira Donegan",
-        "url": "https://www.theguardian.com/commentisfree/2026/jun/30/supreme-court-trump-v-slaughter",
-        "ts": "30/06 09:00"
+        "kw": "executive order",
+        "title": "The Birthright Decision Was Surprisingly Close, Some Legal Scholars Say",
+        "url": "https://www.nytimes.com/2026/07/01/us/politics/birthright-supreme-court-decision.html",
+        "ts": "01/07 09:04"
+      },
+      {
+        "label": "NYT",
+        "sev": 15,
+        "tier": "Onbepaald",
+        "kw": "",
+        "title": "Trump’s Historical Yarns Often Stretch (or Disregard) the Truth",
+        "url": "https://www.nytimes.com/2026/07/01/us/politics/trump-fact-check-american-history.html",
+        "ts": "01/07 09:02"
+      },
+      {
+        "label": "NYT",
+        "sev": 15,
+        "tier": "Onbepaald",
+        "kw": "",
+        "title": "Despite Some Losses for Trump, Supreme Court Delivers Enduring Conservative Wins",
+        "url": "https://www.nytimes.com/2026/07/01/us/politics/supreme-court-term-trump-conservatives.html",
+        "ts": "01/07 09:02"
+      },
+      {
+        "label": "CBS",
+        "sev": 34,
+        "tier": "Beleidssignaal / dreiging",
+        "kw": "threat",
+        "title": "New disease threats follow Trump administration's health program cuts",
+        "url": "https://www.cbsnews.com/news/disease-threats-trump-administration-health-program-cuts/",
+        "ts": "01/07 09:00"
       },
       {
         "label": "NPR",
-        "sev": 34,
-        "tier": "Beleidssignaal / dreiging",
-        "kw": "weighs",
-        "title": "Inside the coordinated strategy to radically reshape U.S. immigration",
-        "url": "https://www.npr.org/2026/06/30/g-s1-129953/remaking-immigration-explainer-video",
-        "ts": "30/06 09:00"
-      },
-      {
-        "label": "NYT World",
         "sev": 15,
         "tier": "Onbepaald",
         "kw": "",
-        "title": "What the U.S. Owes Venezuela",
-        "url": "https://www.nytimes.com/2026/06/29/world/venezuela-earthquake-trump-aid.html",
-        "ts": "30/06 04:44"
+        "title": "Supreme Court deals some blows to Trump's agenda but leaves him with more expansive powers",
+        "url": "https://www.npr.org/2026/07/01/nx-s1-5876231/supreme-court-deals-some-blows-to-trumps-agenda-but-leaves-him-with-more-expansive-powers",
+        "ts": "01/07 09:00"
       },
       {
         "label": "Al Jazeera",
-        "sev": 82,
-        "tier": "Oorlog / militair",
-        "kw": "war",
-        "title": "Trump tells US petrol retailers to reduce prices ‘immediately’",
-        "url": "https://www.aljazeera.com/economy/2026/6/30/trump-tells-us-petrol-retailers-to-reduce-prices-immediately?traffic_source=rss",
-        "ts": "30/06 04:11"
-      },
-      {
-        "label": "Guardian",
-        "sev": 50,
-        "tier": "Concrete maatregel",
-        "kw": "deport",
-        "title": "Liberal supreme court justices condemn ‘destabilizing’ ruling that expands Trump’s power to fire regulators – as it happened",
-        "url": "https://www.theguardian.com/us-news/live/2026/jun/29/supreme-court-donald-trump-administration-us-politics-latest-news-updates",
-        "ts": "30/06 02:07"
-      },
-      {
-        "label": "Guardian",
         "sev": 15,
         "tier": "Onbepaald",
         "kw": "",
-        "title": "Trump news at a glance: Trump tried to appeal E Jean Carroll verdict all the way to the supreme court. They passed",
-        "url": "https://www.theguardian.com/us-news/2026/jun/29/trump-news-at-a-glance-e-jean-carroll",
-        "ts": "30/06 01:03"
+        "title": "Trump official says White House will fight birthright citizenship decision",
+        "url": "https://www.aljazeera.com/video/2026/7/1/trump-official-says-white-house-will-fight-birthright-citizenship-decision?traffic_source=rss",
+        "ts": "01/07 08:20"
+      },
+      {
+        "label": "BBC US",
+        "sev": 15,
+        "tier": "Onbepaald",
+        "kw": "",
+        "title": "Trump made more than $1bn from crypto in first year back in office",
+        "url": "https://www.bbc.co.uk/news/articles/cvgmv98ez3zo?at_medium=RSS&at_campaign=rss",
+        "ts": "01/07 07:30"
       },
       {
         "label": "FOX",
-        "sev": 15,
-        "tier": "Onbepaald",
-        "kw": "",
-        "title": "Trump taps acting Labor Secretary Keith Sonderling for permanent role pending Senate confirmation",
-        "url": "https://www.foxnews.com/politics/trump-taps-acting-labor-secretary-keith-sonderling-permanent-role-pending-senate-confirmation",
-        "ts": "30/06 00:50"
+        "sev": 36,
+        "tier": "Beleidssignaal / dreiging",
+        "kw": "threaten",
+        "title": "Trump administration threatens Kansas school district funding over transgender student policy",
+        "url": "https://www.foxnews.com/politics/trump-administration-threatens-kansas-school-district-funding-over-transgender-student-policy",
+        "ts": "01/07 07:18"
+      },
+      {
+        "label": "AP",
+        "sev": 34,
+        "tier": "Beleidssignaal / dreiging",
+        "kw": "calls for",
+        "title": "Writer E. Jean Carroll calls for Trump to pay $5.8M after high court appeal fails - AP News",
+        "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNM2lmN1lVOEttaElYZU9NRWF5MFNjX1h2MG5IYk9xQWhkTFNaNWg2QzA0VW1vMEV3N3dqVUJObGp6VlUza2NBVXJrS2F4TVJCZjdPZUM4WTNfaGVYM2NtRkFwUjRvUVNjMzUyMzI2ZXpOLXdSWGtqdWl1OTUwb3d2ZFAxU0xPOC1Yc3hna29xRUpuSHA0cEtVTA?oc=5",
+        "ts": "01/07 05:56"
       }
     ]
   },
   "volume": {
     "by_hour": [
-      32,
-      28,
-      13,
-      8,
-      5,
-      12,
-      12,
-      7,
-      3,
-      124,
-      7,
-      19,
-      26,
-      11,
-      16,
-      15,
+      44,
+      47,
+      24,
       30,
-      22,
-      39,
+      9,
+      16,
+      21,
+      13,
+      5,
+      155,
+      8,
       26,
-      25,
-      29,
-      40,
-      34
+      31,
+      11,
+      21,
+      19,
+      36,
+      28,
+      42,
+      36,
+      32,
+      34,
+      53,
+      45
     ],
     "by_weekday": [
-      144,
+      159,
+      167,
+      164,
       82,
-      81,
-      79,
-      72,
-      61,
-      64
+      80,
+      67,
+      67
     ],
     "by_week_of_month": [
-      20,
-      38,
-      60,
-      333,
-      132
+      103,
+      45,
+      66,
+      347,
+      225
     ],
-    "total": 583,
+    "total": 786,
     "since": "2026-06-29",
     "tz": "Europe/Brussels"
   }
